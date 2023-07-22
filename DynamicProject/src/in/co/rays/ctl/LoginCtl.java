@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import in.co.rays.bean.UserBean;
 import in.co.rays.model.UserModel;
@@ -17,6 +18,16 @@ public class LoginCtl extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String op = req.getParameter("operation");
+
+		if (op != null) {
+
+			HttpSession session = req.getSession();
+
+			session.invalidate();
+
+		}
 
 		resp.sendRedirect("LoginView.jsp");
 
@@ -39,9 +50,10 @@ public class LoginCtl extends HttpServlet {
 
 				if (bean != null) {
 
-					req.setAttribute("bean", bean);
-					RequestDispatcher rd = req.getRequestDispatcher("WelcomeCtl");
-					rd.forward(req, resp);
+					HttpSession session = req.getSession();
+
+					session.setAttribute("bean", bean);
+					resp.sendRedirect("WelcomeCtl");
 				} else {
 
 					req.setAttribute("msg", "Login & Password is Invalid..!!");
