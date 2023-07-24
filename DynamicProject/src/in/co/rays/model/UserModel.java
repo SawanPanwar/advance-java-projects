@@ -83,6 +83,37 @@ public class UserModel {
 
 	}
 
+	public UserBean findByPk(int id) throws Exception {
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/adv", "root", "root");
+
+		PreparedStatement ps = conn.prepareStatement("select * from user where id = ?");
+
+		ps.setInt(1, id);
+
+		ResultSet rs = ps.executeQuery();
+
+		UserBean bean = null;
+
+		while (rs.next()) {
+
+			bean = new UserBean();
+			bean.setId(rs.getInt(1));
+			bean.setFirstName(rs.getString(2));
+			bean.setLastName(rs.getString(3));
+			bean.setLoginId(rs.getString(4));
+			bean.setPassword(rs.getString(5));
+			bean.setDob(rs.getDate(6));
+			bean.setAddress(rs.getString(7));
+
+		}
+
+		return bean;
+
+	}
+
 	public List search(UserBean bean, int pageNo, int pageSize) throws Exception {
 
 		Connection conn = JDBCDataSource.getConnection();

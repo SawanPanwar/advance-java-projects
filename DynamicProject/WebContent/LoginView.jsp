@@ -39,5 +39,6 @@
 					<input type="submit" name="operation" value="SignUp"></td>
 			</tr>
 		</table>
+	</form>
 </body>
 </html>
