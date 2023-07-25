@@ -15,6 +15,7 @@
 		UserBean bean = (UserBean) request.getAttribute("bean");
 	%>
 	<form action="UserCtl" method="post">
+	<%@ include file="Header.jsp" %>
 		<table>
 			<tr>
 				<td><input type="hidden" name="id" value="<%=bean.getId()%>"></td>
@@ -51,7 +52,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" value="Update"></td>
+				<td><input type="submit" name="operation" value="update"></td>
 			</tr>
 		</table>
 

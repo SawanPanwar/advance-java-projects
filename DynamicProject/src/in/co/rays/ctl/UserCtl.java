@@ -50,12 +50,14 @@ public class UserCtl extends HttpServlet {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+		String id = req.getParameter("id");
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
 		String loginId = req.getParameter("loginId");
 		String password = req.getParameter("password");
 		String dob = req.getParameter("dob");
 		String address = req.getParameter("address");
+		String op = req.getParameter("operation");
 
 		UserBean bean = new UserBean();
 		bean.setFirstName(firstName);
@@ -71,16 +73,33 @@ public class UserCtl extends HttpServlet {
 
 		UserModel model = new UserModel();
 
-		try {
-			model.add(bean);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (op.equals("signUp")) {
+			try {
+				model.add(bean);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			req.setAttribute("msg", "User Registered Successfully..!!!");
+
+			RequestDispatcher rd = req.getRequestDispatcher("UserRegistrationView.jsp");
+			rd.forward(req, resp);
 		}
 
-		req.setAttribute("msg", "User Registered Successfully..!!!");
+		if (op.equals("update")) {
 
-		RequestDispatcher rd = req.getRequestDispatcher("UserRegistrationView.jsp");
-		rd.forward(req, resp);
+			bean.setId(Integer.parseInt(id));
+
+			try {
+				model.update(bean);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			resp.sendRedirect("UserListCtl");
+
+		}
+
 	}
 
 }
