@@ -96,7 +96,7 @@ public class UserCtl extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			resp.sendRedirect("UserListCtl");
+			resp.sendRedirect("UserListCtl.do");
 
 		}
 

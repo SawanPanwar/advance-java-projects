@@ -10,7 +10,7 @@
 <body>
 
 	<%
-		UserBean bean1 = (UserBean) session.getAttribute("bean");
+		UserBean bean1 = (UserBean) session.getAttribute("user");
 	%>
 	<%
 		if (bean1 != null) {
@@ -19,8 +19,11 @@
 		Hii,
 		<%=bean1.getFirstName()%>
 	</h3>
-	<h3><a href="UserListCtl">UserList</a> | <a href="LoginCtl?operation=logout">Logout</a> </h3>
-	
+	<h3>
+		<a href="UserListCtl.do">UserList</a> | <a
+			href="LoginCtl?operation=logout">Logout</a>
+	</h3>
+
 	<%
 		} else {
 	%>
