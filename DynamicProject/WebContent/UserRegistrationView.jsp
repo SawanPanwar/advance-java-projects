@@ -12,48 +12,56 @@
 		String msg = (String) request.getAttribute("msg");
 	%>
 	<form action="UserCtl" method="post">
-		<table>
-			<tr>
-				<%
-					if (msg != null) {
-				%>
-				<%=msg%>
-				<%
-					}
-				%>
-			</tr>
-			<tr>
-				<th>First Name :</th>
-				<td><input type="text" name="firstName"></td>
-			</tr>
-			<tr>
-				<th>Last Name :</th>
-				<td><input type="text" name="lastName"></td>
-			</tr>
-			<tr>
-				<th>Login ID :</th>
-				<td><input type="text" name="loginId"></td>
-			</tr>
-			<tr>
-				<th>Password :</th>
-				<td><input type="text" name="password"></td>
-			</tr>
-			<tr>
-				<th>DOB :</th>
-				<td><input type="date" name="dob"></td>
-			</tr>
-			<tr>
-				<th>Address :</th>
-				<td><input type="text" name="address"></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" name="operation" value="signUp"></td>
-			</tr>
-		</table>
-
+		<%@ include file="Header.jsp"%>
+		<br> <br>
+		<div align="center">
+			<h1 align="center" style="margin-bottom: -15; color: navy">Add
+				User</h1>
+			<table>
+				<tr>
+					<%
+						if (msg != null) {
+					%>
+					<%=msg%>
+					<%
+						}
+					%>
+				</tr>
+				<tr>
+					<th>First Name :</th>
+					<td><input type="text" name="firstName"></td>
+				</tr>
+				<tr>
+					<th>Last Name :</th>
+					<td><input type="text" name="lastName"></td>
+				</tr>
+				<tr>
+					<th>Login ID :</th>
+					<td><input type="text" name="loginId"></td>
+				</tr>
+				<tr>
+					<th>Password :</th>
+					<td><input type="text" name="password"></td>
+				</tr>
+				<tr>
+					<th>DOB :</th>
+					<td><input type="date" name="dob"></td>
+				</tr>
+				<tr>
+					<th>Address :</th>
+					<td><input type="text" name="address"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" name="operation" value="signUp"></td>
+				</tr>
+			</table>
+		</div>
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> <br> <br> <br>
 	</form>
 
+	<%@ include file="Footer.jsp"%>
 
 </body>
 </html>

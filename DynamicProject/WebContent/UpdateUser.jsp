@@ -15,50 +15,61 @@
 		UserBean bean = (UserBean) request.getAttribute("bean");
 	%>
 	<form action="UserCtl" method="post">
-	<%@ include file="Header.jsp" %>
-		<table>
-			<tr>
-				<td><input type="hidden" name="id" value="<%=bean.getId()%>"></td>
-			</tr>
+		<%@ include file="Header.jsp"%>
+		<br> <br>
+		<div align="center">
+			<h1 align="center" style="margin-bottom: -15; color: navy">
+				Update User</h1>
+			<table>
+				<tr>
+					<td><input type="hidden" name="id" value="<%=bean.getId()%>"></td>
+				</tr>
 
-			<tr>
-				<th>First Name :</th>
-				<td><input type="text" name="firstName"
-					value="<%=bean.getFirstName()%>"></td>
-			</tr>
-			<tr>
-				<th>Last Name :</th>
-				<td><input type="text" name="lastName"
-					value="<%=bean.getLastName()%>"></td>
-			</tr>
-			<tr>
-				<th>Login ID :</th>
-				<td><input type="text" name="loginId"
-					value="<%=bean.getLoginId()%>"></td>
-			</tr>
-			<tr>
-				<th>Password :</th>
-				<td><input type="text" name="password"
-					value="<%=bean.getPassword()%>"></td>
-			</tr>
-			<tr>
-				<th>DOB :</th>
-				<td><input type="date" name="dob" value="<%=bean.getDob()%>"></td>
-			</tr>
-			<tr>
-				<th>Address :</th>
-				<td><input type="text" name="address"
-					value="<%=bean.getAddress()%>"></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" name="operation" value="update"></td>
-			</tr>
-		</table>
-
+				<tr>
+					<th>First Name :</th>
+					<td><input type="text" name="firstName"
+						value="<%=bean.getFirstName()%>"></td>
+				</tr>
+				<tr>
+					<th>Last Name :</th>
+					<td><input type="text" name="lastName"
+						value="<%=bean.getLastName()%>"></td>
+				</tr>
+				<tr>
+					<th>Login ID :</th>
+					<td><input type="text" name="loginId"
+						value="<%=bean.getLoginId()%>"></td>
+				</tr>
+				<tr>
+					<th>Password :</th>
+					<td><input type="text" name="password"
+						value="<%=bean.getPassword()%>"></td>
+				</tr>
+				<tr>
+					<th>DOB :</th>
+					<td><input type="date" name="dob" value="<%=bean.getDob()%>"></td>
+				</tr>
+				<tr>
+					<th>Address :</th>
+					<td><input type="text" name="address"
+						value="<%=bean.getAddress()%>"></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="2"><input type="submit" name="operation" value="update">  <input
+						type="submit" name="operation" value="list"></td>
+				</tr>
+			</table>
+		</div>
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> <br> <br> <br>
 	</form>
 
-
+	<%@ include file="Footer.jsp"%>
 
 </body>
 </html>

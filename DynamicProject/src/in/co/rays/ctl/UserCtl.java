@@ -100,6 +100,12 @@ public class UserCtl extends HttpServlet {
 
 		}
 
+		if (op.equals("list")) {
+
+			resp.sendRedirect("UserListCtl.do");
+
+		}
+
 	}
 
 }

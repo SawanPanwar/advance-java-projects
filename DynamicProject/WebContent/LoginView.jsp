@@ -15,32 +15,47 @@
 			String msg = (String) request.getAttribute("msg");
 			String uri = (String) request.getAttribute("uri");
 		%>
-		<table>
-			<tr>
-				<%
-					if (msg != null) {
-				%>
-				<%=msg%>
-				<%
-					}
-				%>
-			</tr>
-			<tr>
-				<th>Login ID :</th>
-				<td><input type="text" name="loginId"></td>
-			</tr>
-			<tr>
-				<th>Password :</th>
-				<td><input type="text" name="password"></td>
-			</tr>
+		<br> <br> <br> <br>
+		<div align="center">
+			<table>
+				<h1 align="center" style="margin-bottom: -15; color: navy">Login</h1>
+				<tr>
+					<%
+						if (msg != null) {
+					%>
+					<%=msg%>
+					<%
+						}
+					%>
+				</tr>
+				<tr>
+					<th align="left">Login ID :</th>
+					<td align="center"><input type="text" name="loginId"></td>
+				</tr>
+				<tr>
+					<th align="left">Password :</th>
+					<td align="center"><input type="text" name="password"></td>
+				</tr>
 
-			<tr>
-				<td></td>
-				<td><input type="submit" name="operation" value="SignIn">
-					<input type="submit" name="operation" value="SignUp"></td>
-			</tr>
-		</table>
-		<input type="hidden" name="uri" value="<%=uri%>">
+				<tr>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td><input type="submit" name="operation" value="SignIn">
+						<input type="submit" name="operation" value="SignUp"></td>
+				</tr>
+			</table>
+		</div>
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> <br> <input type="hidden" name="uri" value="<%=uri%>">
 	</form>
+	<%@ include file="Footer.jsp"%>
 </body>
 </html>

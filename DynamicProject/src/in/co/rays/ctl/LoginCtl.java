@@ -51,6 +51,11 @@ public class LoginCtl extends HttpServlet {
 				if (bean != null) {
 
 					HttpSession session = req.getSession();
+
+					System.out.println("login = " + session.getId());
+
+					// session.setMaxInactiveInterval(15);
+
 					session.setAttribute("user", bean);
 
 					String uri = req.getParameter("uri");

@@ -14,11 +14,19 @@
 		<%@ include file="Header.jsp"%>
 
 
-
-		<h1>Welcome to Rays...!!!!!</h1>
+		<br> <br> <br>
+		<h1 align="center">
+			<font size="10px" color="navy">Welcome to ORS</font>
+		</h1>
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> <br> <br> <br>
+		<br> <br>
 
 
 	</form>
+
+	<%@ include file="Footer.jsp"%>
 
 </body>
 </html>
