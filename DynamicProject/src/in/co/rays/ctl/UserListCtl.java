@@ -25,8 +25,9 @@ public class UserListCtl extends HttpServlet {
 
 		try {
 			List list = model.search(null, pageNo, pageSize);
-
+			List nextList = model.search(null, pageNo + 1, pageSize);
 			req.setAttribute("list", list);
+			req.setAttribute("nextList", nextList.size());
 			req.setAttribute("pageNo", pageNo);
 
 			RequestDispatcher rd = req.getRequestDispatcher("UserListView.jsp");
@@ -98,9 +99,12 @@ public class UserListCtl extends HttpServlet {
 		}
 
 		List list;
+		List nextList;
 		try {
 			list = model.search(bean, pageNo, pageSize);
+			nextList = model.search(bean, pageNo + 1, pageSize);
 			req.setAttribute("list", list);
+			req.setAttribute("nextList", nextList.size());
 			req.setAttribute("pageNo", pageNo);
 			RequestDispatcher rd = req.getRequestDispatcher("UserListView.jsp");
 			rd.forward(req, resp);

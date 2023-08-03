@@ -35,14 +35,12 @@ public class UserCtl extends HttpServlet {
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
+		} else {
+			resp.sendRedirect("UserRegistrationView.jsp");
 		}
-
-		resp.sendRedirect("UserRegistrationView.jsp");
-
 	}
 
 	@Override

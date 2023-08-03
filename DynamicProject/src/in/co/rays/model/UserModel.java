@@ -88,9 +88,7 @@ public class UserModel {
 
 	public UserBean authenticate(String loginId, String password) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/adv", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement ps = conn.prepareStatement("select * from user where login_id = ? and password = ?");
 
@@ -120,9 +118,7 @@ public class UserModel {
 
 	public UserBean findByPk(int id) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/adv", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement ps = conn.prepareStatement("select * from user where id = ?");
 

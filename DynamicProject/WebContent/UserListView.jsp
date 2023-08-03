@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:useBean id="bean" class="in.co.rays.bean.UserBean" scope="request"></jsp:useBean>
 	<%@ include file="Header.jsp"%>
 	<div align="center">
 		<h1 align="center" style="margin-bottom: -15; color: navy;">User
@@ -18,6 +19,7 @@
 		<form action="UserListCtl.do" method="post">
 			<%
 				int pageNo = (int) request.getAttribute("pageNo");
+				int nextList = (int) request.getAttribute("nextList");
 				int index = ((pageNo - 1) * 5) + 1;
 				List list = (List) request.getAttribute("list");
 				Iterator it = list.iterator();
@@ -53,7 +55,7 @@
 				<%
 					while (it.hasNext()) {
 
-						UserBean bean = (UserBean) it.next();
+						bean = (UserBean) it.next();
 				%>
 
 				<tr>
@@ -77,13 +79,13 @@
 			<table style="width: 100%">
 				<tr>
 					<td style="width: 25%"><input type="submit" name="operation"
-						value="previous"></td>
+						value="previous" <%=(pageNo != 1) ? "" : "disabled"%>></td>
 					<td align="center" style="width: 25%"><input type="submit"
 						name="operation" value="add"></td>
 					<td align="center" style="width: 25%"><input type="submit"
 						name="operation" value="delete"></td>
 					<td style="width: 25%" align="right"><input type="submit"
-						name="operation" value="next"></td>
+						name="operation" value="next" <%=(nextList != 0) ? "" : "disabled"%>></td>
 				</tr>
 			</table>
 			<input type="hidden" name="pageNo" value="<%=pageNo%>">
