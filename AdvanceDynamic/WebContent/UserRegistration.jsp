@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="Second.jsp" method="post">
+	<form action="FirstServlet" method="post">
 		<table>
 			<tr>
 				<th>FirstName :</th>
