@@ -8,20 +8,24 @@
 </head>
 <body>
 
-	<%
-		String name = "Shubh..!!!!";
-		for (int i = 1; i <= 5; i++) {
-	%>
+	<form action="FirstServlet" method="post">
+		<table>
 
-	<h1>
-		How are you
-		<%=name%>
-		?
-	</h1>
+			<tr>
+				<th>FirstName :</th>
+				<td><input type="text" name="firstName"></td>
+			</tr>
+			<tr>
+				<th>LastName :</th>
+				<td><input type="text" name="lastName"></td>
+			</tr>
 
-	<%
-		}
-	%>
+			<tr>
+				<th></th>
+				<td><input type="submit"></td>
+			</tr>
+		</table>
+	</form>
 
 
 </body>
