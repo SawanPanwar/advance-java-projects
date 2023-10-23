@@ -44,6 +44,7 @@ public class UserListCtl extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		UserBean bean = null;
+		UserModel model = new UserModel();
 
 		String op = req.getParameter("operation");
 
@@ -59,6 +60,25 @@ public class UserListCtl extends HttpServlet {
 			pageNo--;
 		}
 
+		if (op.equals("delete")) {
+
+			String[] ids = req.getParameterValues("ids");
+
+			if (ids != null) {
+				for (String id : ids) {
+
+					try {
+						model.delete(Integer.parseInt(id));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+			req.setAttribute("msg", "Select atleast one record..!!!");
+
+		}
+
 		if (op.equals("search")) {
 
 			String firstName = req.getParameter("firstName");
@@ -68,8 +88,6 @@ public class UserListCtl extends HttpServlet {
 			bean.setFirstName(firstName);
 
 		}
-
-		UserModel model = new UserModel();
 
 		try {
 			List list = model.search(bean, pageNo, pageSize);

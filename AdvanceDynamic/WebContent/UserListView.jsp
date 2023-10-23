@@ -15,6 +15,8 @@
 
 
 		<%
+			String msg = (String) request.getAttribute("msg");
+
 			int pageNo = (int) request.getAttribute("pageNo");
 
 			int index = ((pageNo - 1) * 5) + 1;
@@ -27,14 +29,29 @@
 		%>
 		<table>
 			<tr>
-				<th>FirstName :</th>
-				<td><input type="text" name="firstName"></td>
-				<td><input type="submit" name="operation" value="search"></td>
+				<td></td>
+				<td>
+					<%
+						if (msg != null) {
+					%> <font color="red"><h4>
+							<%=msg%></h4></font> <%
+ 	}
+ %>
+				</td>
 			</tr>
 		</table>
 
+		<table>
+			<tr>
+				<th>FirstName :</th>
+				<td><input type="text" name="firstName"></td>
+				<td><input type="submit" name="operation" value="search"></td>
+				<td><input type="submit" name="operation" value="delete"></td>
+			</tr>
+		</table>
 		<table border="1">
 			<tr>
+				<th>Select</th>
 				<th>S.No.</th>
 				<th>FirstName</th>
 				<th>LastName</th>
@@ -49,6 +66,8 @@
 					UserBean bean = (UserBean) it.next();
 			%>
 			<tr>
+				<td><input type="checkbox" name="ids" value="<%=bean.getId()%>">
+				</td>
 				<td><%=index++%></td>
 				<td><%=bean.getFirstName()%></td>
 				<td><%=bean.getLastName()%></td>
