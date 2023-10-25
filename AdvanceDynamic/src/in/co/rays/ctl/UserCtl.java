@@ -1,10 +1,10 @@
 package in.co.rays.ctl;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +19,25 @@ public class UserCtl extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String id = req.getParameter("id");
+
+		if (id != null) {
+
+			UserModel model = new UserModel();
+
+			try {
+				UserBean bean = model.findById(Integer.parseInt(id));
+				req.setAttribute("bean", bean);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
+		rd.forward(req, resp);
+
 	}
 
 	@Override
@@ -27,18 +46,24 @@ public class UserCtl extends HttpServlet {
 
 		System.out.println("in first servlet do post...!!");
 
-		String fname = req.getParameter("firstName");
-		String lname = req.getParameter("lastName");
-		String login = req.getParameter("loginId");
-		String pwd = req.getParameter("password");
+		String op = req.getParameter("operation");
+
+		String id = req.getParameter("id");
+		String firstName = req.getParameter("firstName");
+		String lastName = req.getParameter("lastName");
+		String loginId = req.getParameter("loginId");
+		String password = req.getParameter("password");
 		String dob = req.getParameter("dob");
 		String address = req.getParameter("address");
 
 		UserBean bean = new UserBean();
-		bean.setFirstName(fname);
-		bean.setLastName(lname);
-		bean.setLoginId(login);
-		bean.setPassword(pwd);
+		if (id != null) {
+			bean.setId(Integer.parseInt(id));
+		}
+		bean.setFirstName(firstName);
+		bean.setLastName(lastName);
+		bean.setLoginId(loginId);
+		bean.setPassword(password);
 		try {
 			bean.setDob(sdf.parse(dob));
 		} catch (ParseException e) {
@@ -47,18 +72,32 @@ public class UserCtl extends HttpServlet {
 		bean.setAddress(address);
 
 		UserModel model = new UserModel();
-		try {
-			model.add(bean);
-		} catch (Exception e) {
-			e.printStackTrace();
+
+		if (op.equals("add")) {
+			try {
+				model.add(bean);
+				req.setAttribute("msg", "User added Successfully...!!!");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
-		resp.setContentType("text/html");
 
-		PrintWriter out = resp.getWriter();
+		if (op.equals("update")) {
+			try {
+				model.update(bean);
+				bean = model.findById(Integer.parseInt(id));
+				req.setAttribute("msg", "User updated Successfully...!!!");
+				req.setAttribute("bean", bean);
 
-		out.write("<h1>Hello Guys... how are you???</h1>");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
-		out.close();
+		}
+
+		RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
+		rd.forward(req, resp);
 
 	}
 

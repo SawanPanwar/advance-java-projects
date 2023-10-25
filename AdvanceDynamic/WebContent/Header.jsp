@@ -19,8 +19,9 @@
 	<h3>
 		Hi,
 		<%=user.getFirstName()%></h3>
-	<a href="UserListCtl">UserList</a> |
-	<a href="LoginCtl?operation=logout">Logout</a>
+	<b><a href="UserCtl">Add User</a></b> |
+	<b><a href="UserListCtl">UserList</a></b> |
+	<b><a href="LoginCtl?operation=logout">Logout</a></b>
 	<%
 		} else {
 	%>

@@ -73,9 +73,9 @@ public class UserListCtl extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
+			} else {
+				req.setAttribute("msg", "Select atleast one record..!!!");
 			}
-
-			req.setAttribute("msg", "Select atleast one record..!!!");
 
 		}
 
