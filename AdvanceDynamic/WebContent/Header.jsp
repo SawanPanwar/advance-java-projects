@@ -10,7 +10,7 @@
 <body>
 
 	<%
-		UserBean user = (UserBean) session.getAttribute("bean");
+		UserBean user = (UserBean) session.getAttribute("user");
 	%>
 
 	<%
@@ -20,7 +20,7 @@
 		Hi,
 		<%=user.getFirstName()%></h3>
 	<b><a href="UserCtl">Add User</a></b> |
-	<b><a href="UserListCtl">UserList</a></b> |
+	<b><a href="UserListCtl.do">UserList</a></b> |
 	<b><a href="LoginCtl?operation=logout">Logout</a></b>
 	<%
 		} else {

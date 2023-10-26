@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="UserListCtl" method="post">
+	<form action="UserListCtl.do" method="post">
 
 		<%@ include file="Header.jsp"%>
 

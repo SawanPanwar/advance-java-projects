@@ -11,6 +11,7 @@
 		<%@ include file="Header.jsp"%>
 		<%
 			String msg = (String) request.getAttribute("msg");
+			String uri = (String) request.getAttribute("uri");
 		%>
 		<table>
 			<%
@@ -33,6 +34,7 @@
 				<td><input type="submit"></td>
 			</tr>
 		</table>
+		<input type="hidden" name="uri" value="<%=uri%>">
 	</form>
 </body>
 </html>
