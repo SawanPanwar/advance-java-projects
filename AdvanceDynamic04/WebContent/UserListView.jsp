@@ -19,6 +19,8 @@
 
 	<%@ include file="Header.jsp"%>
 	<form action="UserListCtl.do" method="post">
+		<jsp:useBean id="bean" class="in.co.rays.bean.UserBean"
+			scope="request"></jsp:useBean>
 		<table style="width: 30%">
 			<tr>
 				<td><input type="text" name="firstName"
@@ -48,7 +50,7 @@
 			<%
 				while (it.hasNext()) {
 
-					UserBean bean = (UserBean) it.next();
+					bean = (UserBean) it.next();
 			%>
 
 			<tr>
