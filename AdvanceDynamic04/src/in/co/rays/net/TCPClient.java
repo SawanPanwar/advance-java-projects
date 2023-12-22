@@ -1,4 +1,4 @@
-package com.rays.net;
+package in.co.rays.net;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
