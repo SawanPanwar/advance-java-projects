@@ -1,10 +1,10 @@
-package in.co.rays.test;
+package in.co.rays.pstmt;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 
-public class TestInsert {
+public class TestPSTMTInsert {
 
 	public static void main(String[] args) throws Exception {
 
@@ -12,11 +12,11 @@ public class TestInsert {
 
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
 
-		Statement stmt = conn.createStatement();
+		PreparedStatement pstmt = conn.prepareStatement("insert into marksheet values(11, 111, 'pqr', 79, 59, 89)");
 
-		int i = stmt.executeUpdate("insert into marksheet values(10, 110, 'abc', 78, 89, 99)");
+		int i = pstmt.executeUpdate();
 
-		System.out.println("Data inserted = " + i);
+		System.out.println("Data Inserted = " + i);
 
 	}
 

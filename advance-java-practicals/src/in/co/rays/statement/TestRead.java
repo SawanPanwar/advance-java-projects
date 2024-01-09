@@ -1,4 +1,4 @@
-package in.co.rays.test;
+package in.co.rays.statement;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
