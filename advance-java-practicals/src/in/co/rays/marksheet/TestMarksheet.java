@@ -10,7 +10,6 @@ public class TestMarksheet {
 		// testAdd();
 		// testUpdate();
 		// testDelete();
-		// testReadAll();
 		// testFindByPk();
 		testSearch();
 
@@ -18,22 +17,27 @@ public class TestMarksheet {
 
 	private static void testSearch() throws Exception {
 
+		MarksheetBean bean = new MarksheetBean();
+
+		bean.setName("r");
+		// bean.setRollNo(102);
+
 		MarksheetModel model = new MarksheetModel();
 
-		List list = model.search();
+		List list = model.search(bean, 1, 5);
 
 		Iterator it = list.iterator();
 
 		while (it.hasNext()) {
 
-			MarksheetBean bean = (MarksheetBean) it.next();
+			bean = (MarksheetBean) it.next();
 
-			System.out.println(bean.getId());
-			System.out.println(bean.getRollNo());
-			System.out.println(bean.getName());
-			System.out.println(bean.getPhysics());
-			System.out.println(bean.getChemistry());
-			System.out.println(bean.getMaths());
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getRollNo());
+			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getPhysics());
+			System.out.print("\t" + bean.getChemistry());
+			System.out.println("\t" + bean.getMaths());
 
 		}
 
@@ -57,14 +61,6 @@ public class TestMarksheet {
 		}
 	}
 
-	private static void testReadAll() throws Exception {
-
-		MarksheetModel model = new MarksheetModel();
-
-		model.readAll();
-
-	}
-
 	private static void testDelete() throws Exception {
 
 		MarksheetModel model = new MarksheetModel();
@@ -75,9 +71,9 @@ public class TestMarksheet {
 
 	private static void testUpdate() throws Exception {
 		MarksheetBean bean = new MarksheetBean();
-		bean.setId(15);
-		bean.setRollNo(115);
-		bean.setName("qwe");
+		bean.setId(3);
+		bean.setRollNo(103);
+		bean.setName("uuu");
 		bean.setPhysics(87);
 		bean.setChemistry(78);
 		bean.setMaths(67);

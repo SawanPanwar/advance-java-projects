@@ -68,27 +68,6 @@ public class MarksheetModel {
 
 	}
 
-	public void readAll() throws Exception {
-
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
-
-		PreparedStatement pstmt = conn.prepareStatement("select * from marksheet");
-
-		ResultSet rs = pstmt.executeQuery();
-
-		while (rs.next()) {
-			System.out.print(rs.getInt(1));
-			System.out.print("\t" + rs.getInt(2));
-			System.out.print("\t" + rs.getString(3));
-			System.out.print("\t" + rs.getInt(4));
-			System.out.print("\t" + rs.getInt(5));
-			System.out.println("\t" + rs.getInt(6));
-		}
-
-	}
-
 	public MarksheetBean findByPk(int id) throws Exception {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -115,20 +94,40 @@ public class MarksheetModel {
 		return bean;
 	}
 
-	public List search() throws Exception {
+	public List search(MarksheetBean bean, int pageNo, int pageSize) throws Exception {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
 
-		PreparedStatement pstmt = conn.prepareStatement("select * from marksheet");
+		StringBuffer sql = new StringBuffer("select * from marksheet where 1=1");
+
+		if (bean != null) {
+
+			if (bean.getName() != null && bean.getName().length() > 0) {
+				sql.append(" and name like '" + bean.getName() + "%'");
+			}
+
+			if (bean.getRollNo() > 0) {
+				sql.append(" and roll_no = " + bean.getRollNo());
+			}
+		}
+
+		if (pageSize > 0) {
+			pageNo = (pageNo - 1) * pageSize;
+			sql.append(" limit " + pageNo + ", " + pageSize);
+		}
+
+		System.out.println("sql ==>> " + sql.toString());
+
+		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 
 		ResultSet rs = pstmt.executeQuery();
 
 		List list = new ArrayList();
 
 		while (rs.next()) {
-			MarksheetBean bean = new MarksheetBean();
+			bean = new MarksheetBean();
 			bean.setId(rs.getInt(1));
 			bean.setRollNo(rs.getInt(2));
 			bean.setName(rs.getString(3));
