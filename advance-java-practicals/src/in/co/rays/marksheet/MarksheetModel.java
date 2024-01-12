@@ -9,7 +9,28 @@ import java.util.List;
 
 public class MarksheetModel {
 
+	public Integer nextPk() throws Exception {
+
+		int pk = 0;
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
+
+		PreparedStatement pstmt = conn.prepareStatement("select max(id) from marksheet");
+
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			pk = rs.getInt(1);
+		}
+
+		return pk + 1;
+	}
+
 	public void add(MarksheetBean bean) throws Exception {
+
+		int pk = nextPk();
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -17,7 +38,7 @@ public class MarksheetModel {
 
 		PreparedStatement pstmt = conn.prepareStatement("insert into marksheet values(?, ?, ?, ?, ?, ?)");
 
-		pstmt.setInt(1, bean.getId());
+		pstmt.setInt(1, pk);
 		pstmt.setInt(2, bean.getRollNo());
 		pstmt.setString(3, bean.getName());
 		pstmt.setInt(4, bean.getPhysics());
@@ -26,7 +47,7 @@ public class MarksheetModel {
 
 		int i = pstmt.executeUpdate();
 
-		System.out.println("Data Inserted = " + i);
+		System.out.println("Data Inserted = " + pk);
 
 	}
 

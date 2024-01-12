@@ -11,7 +11,7 @@ public class TestMarksheet {
 		// testUpdate();
 		// testDelete();
 		// testFindByPk();
-		testSearch();
+		// testSearch();
 
 	}
 
