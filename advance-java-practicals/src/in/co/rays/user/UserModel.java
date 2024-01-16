@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.co.rays.marksheet.MarksheetBean;
+import in.co.rays.util.JDBCDataSource;
 
 public class UserModel {
 
@@ -15,9 +16,7 @@ public class UserModel {
 
 		int pk = 0;
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement("select max(id) from user");
 
@@ -33,9 +32,7 @@ public class UserModel {
 
 		int pk = nextPk();
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement("insert into user values(?, ?, ?, ?, ?, ?, ?)");
 
@@ -55,9 +52,7 @@ public class UserModel {
 
 	public void update(UserBean bean) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement(
 				"update user set first_name = ?, last_name = ?, login_id = ?, password = ?, dob = ?, address = ? where id = ?");
@@ -78,9 +73,7 @@ public class UserModel {
 
 	public void delete(int id) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement("delete from user where id = ?");
 
@@ -94,9 +87,7 @@ public class UserModel {
 
 	public UserBean findByPk(int id) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement("select * from user where id = ?");
 
@@ -121,9 +112,7 @@ public class UserModel {
 
 	public UserBean findByLogin(String login) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement("select * from user where login_id = ?");
 
@@ -148,9 +137,7 @@ public class UserModel {
 
 	public UserBean authenticate(String loginId, String password) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement("select * from user where login_id = ? and password = ?");
 
@@ -176,9 +163,7 @@ public class UserModel {
 
 	public List search(UserBean bean, int pageNo, int pageSize) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance11", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		StringBuffer sql = new StringBuffer("select * from user where 1=1");
 
