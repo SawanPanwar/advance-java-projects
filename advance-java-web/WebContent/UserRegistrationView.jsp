@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="Welcome.jsp" method="post">
+	<form action="FirstServlet" method="post">
 		<table>
 			<tr>
 				<th>First Name :</th>
