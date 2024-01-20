@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="FirstServlet" method="post">
+	<form action="UserRegistrationCtl" method="post">
 		<table>
 			<tr>
 				<th>First Name :</th>
