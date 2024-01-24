@@ -8,7 +8,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="Header.jsp"%>
-	<h3>Welcome to dynamic-web-project</h3>
+	<%
+		UserBean user = (UserBean) request.getAttribute("user");
+	%>
+	<%
+		if (user != null) {
+	%>
+	<h3>
+		Hi,
+		<%=user.getFirstName()%>
+	</h3>
+	<a href="#">Add User</a> |
+	<a href="#">User List</a> |
+	<%
+		} else {
+	%>
+	<h3>Hi, Guest</h3>
+	<%
+		}
+	%>
+	<hr>
 </body>
 </html>
