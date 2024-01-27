@@ -21,7 +21,7 @@ public class UserListCtl extends HttpServlet {
 
 		UserBean bean = null;
 		int pageNo = 1;
-		int pageSize = 10;
+		int pageSize = 15;
 
 		UserModel model = new UserModel();
 
