@@ -12,7 +12,7 @@
 		String msg = (String) request.getAttribute("msg");
 	%>
 	<%@ include file="Header.jsp"%>
-	<form action="UserCtl" method="post">
+	<form action="UserCtl.do" method="post">
 		<%
 			if (msg != null) {
 		%>

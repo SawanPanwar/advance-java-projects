@@ -1,6 +1,8 @@
 package in.co.rays.ctl;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import in.co.rays.bean.UserBean;
 import in.co.rays.model.UserModel;
 
-@WebServlet("/UserListCtl")
+@WebServlet("/UserListCtl.do")
 public class UserListCtl extends HttpServlet {
 
 	@Override
@@ -42,9 +44,12 @@ public class UserListCtl extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		UserBean bean = null;
 		int pageNo = Integer.parseInt(req.getParameter("pageNo"));
 		int pageSize = 5;
+
+		UserModel model = new UserModel();
 
 		String op = req.getParameter("operation");
 
@@ -59,11 +64,32 @@ public class UserListCtl extends HttpServlet {
 		if (op.equals("search")) {
 			pageNo = 1;
 			String firstName = req.getParameter("firstName");
+			String dob = req.getParameter("dob");
 			bean = new UserBean();
 			bean.setFirstName(firstName);
+			try {
+				bean.setDob(sdf.parse(dob));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
 
-		UserModel model = new UserModel();
+		if (op.equals("delete")) {
+
+			pageNo = 1;
+
+			String[] ids = req.getParameterValues("ids");
+
+			if (ids != null && ids.length > 0) {
+				for (String id : ids) {
+					try {
+						model.delete(Integer.parseInt(id));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 
 		try {
 			List list = model.search(bean, pageNo, pageSize);

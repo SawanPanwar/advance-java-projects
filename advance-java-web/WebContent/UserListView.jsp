@@ -18,11 +18,13 @@
 		Iterator it = list.iterator();
 	%>
 	<%@ include file="Header.jsp"%>
-	<form action="UserListCtl" method="post">
+	<form action="UserListCtl.do" method="post">
 		<table>
 			<tr>
 				<td><input type="text" name="firstName">
+				<td><input type="date" name="dob">
 				<td><input type="submit" name="operation" value="search"></td>
+				<td><input type="submit" name="operation" value="delete"></td>
 			</tr>
 		</table>
 		<table border="1">
@@ -42,7 +44,7 @@
 					UserBean bean = (UserBean) it.next();
 			%>
 			<tr>
-				<td><input type="checkbox"></td>
+				<td><input type="checkbox" name="ids" value="<%=bean.getId()%>"></td>
 				<td><%=index++%></td>
 				<td><%=bean.getFirstName()%></td>
 				<td><%=bean.getLastName()%></td>
@@ -50,7 +52,7 @@
 				<td><%=bean.getPassword()%></td>
 				<td><%=bean.getDob()%></td>
 				<td><%=bean.getAddress()%></td>
-				<td><a href="UserCtl?id=<%=bean.getId()%>">edit</a></td>
+				<td><a href="UserCtl.do?id=<%=bean.getId()%>">edit</a></td>
 			</tr>
 			<%
 				}

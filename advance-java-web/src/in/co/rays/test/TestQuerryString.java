@@ -15,10 +15,11 @@ public class TestQuerryString extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("in TestQuerryString do get method..!!");
 		String name = req.getParameter("name");
-		String operation = req.getParameter("operation");
+		String[] address = req.getParameterValues("address");
 
 		System.out.println("name = " + name);
-		System.out.println("operation = " + operation);
+		System.out.println("address = " + address[0]);
+		System.out.println("address1 = " + address[1]);
 	}
 
 }
