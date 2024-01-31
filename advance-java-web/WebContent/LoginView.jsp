@@ -11,6 +11,7 @@
 	<form action="LoginCtl" method="post">
 		<%
 			String msg = (String) request.getAttribute("msg");
+			String uri = (String) request.getAttribute("uri");
 		%>
 		<%
 			if (msg != null) {
@@ -33,6 +34,7 @@
 				<td><input type="submit"></td>
 			</tr>
 		</table>
+		<input type="hidden" name="uri" value="<%=uri%>">
 	</form>
 
 </body>
