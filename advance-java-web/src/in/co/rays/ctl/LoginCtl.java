@@ -39,6 +39,7 @@ public class LoginCtl extends HttpServlet {
 			UserBean bean = model.authenticate(login, pass);
 			if (bean != null) {
 				HttpSession session = req.getSession();
+				// session.setMaxInactiveInterval(20);
 				session.setAttribute("user", bean);
 				if (uri.equalsIgnoreCase("null")) {
 					resp.sendRedirect("Welcome.jsp");
