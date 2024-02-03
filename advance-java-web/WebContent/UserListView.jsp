@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:useBean id="bean" class="in.co.rays.bean.UserBean" scope="request"></jsp:useBean>
 	<%
 		int pageNo = (int) request.getAttribute("pageNo");
 		int index = ((pageNo - 1) * 5) + 1;
@@ -41,7 +42,7 @@
 			</tr>
 			<%
 				while (it.hasNext()) {
-					UserBean bean = (UserBean) it.next();
+					bean = (UserBean) it.next();
 			%>
 			<tr>
 				<td><input type="checkbox" name="ids" value="<%=bean.getId()%>"></td>
