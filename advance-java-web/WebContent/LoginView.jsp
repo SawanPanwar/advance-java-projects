@@ -31,7 +31,8 @@
 			</tr>
 			<tr>
 				<th></th>
-				<td><input type="submit"></td>
+				<td><input type="submit" name="operation" value="signIn">
+					<input type="submit" name="operation" value="signUp"></td>
 			</tr>
 		</table>
 		<input type="hidden" name="uri" value="<%=uri%>">

@@ -32,27 +32,34 @@ public class LoginCtl extends HttpServlet {
 		String login = req.getParameter("loginId");
 		String pass = req.getParameter("password");
 		String uri = req.getParameter("uri");
+		String op = req.getParameter("operation");
 
-		UserModel model = new UserModel();
+		if (op.equals("signIn")) {
+			UserModel model = new UserModel();
 
-		try {
-			UserBean bean = model.authenticate(login, pass);
-			if (bean != null) {
-				HttpSession session = req.getSession();
-				// session.setMaxInactiveInterval(20);
-				session.setAttribute("user", bean);
-				if (uri.equalsIgnoreCase("null")) {
-					resp.sendRedirect("Welcome.jsp");
+			try {
+				UserBean bean = model.authenticate(login, pass);
+				if (bean != null) {
+					HttpSession session = req.getSession();
+					// session.setMaxInactiveInterval(20);
+					session.setAttribute("user", bean);
+					if (uri.equalsIgnoreCase("null")) {
+						resp.sendRedirect("Welcome.jsp");
+					} else {
+						resp.sendRedirect(uri);
+					}
 				} else {
-					resp.sendRedirect(uri);
+					req.setAttribute("msg", "login & password is invalid...!!!");
+					RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
+					rd.forward(req, resp);
 				}
-			} else {
-				req.setAttribute("msg", "login & password is invalid...!!!");
-				RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
-				rd.forward(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		}
+
+		if (op.equals("signUp")) {
+			resp.sendRedirect("UserRegistrationCtl");
 		}
 
 	}

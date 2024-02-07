@@ -67,6 +67,8 @@ public class UserCtl extends HttpServlet {
 			try {
 				model.add(bean);
 				req.setAttribute("msg", "User added successfully...!!");
+				RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
+				rd.forward(req, resp);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -78,13 +80,15 @@ public class UserCtl extends HttpServlet {
 				bean = model.findByPk(bean.getId());
 				req.setAttribute("bean", bean);
 				req.setAttribute("msg", "User updated successfully...!!");
+				RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
+				rd.forward(req, resp);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
-		RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
-		rd.forward(req, resp);
-
+		if (op.equals("list")) {
+			resp.sendRedirect("UserListCtl.do");
+		}
 	}
 }

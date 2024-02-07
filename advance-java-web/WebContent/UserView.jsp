@@ -57,7 +57,8 @@
 			<tr>
 				<th></th>
 				<td><input type="submit" name="operation"
-					value="<%=(bean != null) ? "update" : "save"%>"></td>
+					value="<%=(bean != null) ? "update" : "save"%>"> <input
+					type="submit" name="operation" value="list"></td>
 			</tr>
 		</table>
 	</form>
