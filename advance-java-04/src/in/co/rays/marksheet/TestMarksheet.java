@@ -1,5 +1,8 @@
 package in.co.rays.marksheet;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class TestMarksheet {
 
 	public static void main(String[] args) throws Exception {
@@ -7,9 +10,33 @@ public class TestMarksheet {
 		// testAdd();
 		// testUpdate();
 		// testDelete();
-		// testSearch();
-		testFindByPk();
+		// testSearchSimple();
+		// testFindByPk();
+		testSearch();
 
+	}
+
+	private static void testSearch() throws Exception {
+
+		MarksheetBean bean = new MarksheetBean();
+		bean.setId(6);
+		bean.setName("b");
+
+		MarksheetModel model = new MarksheetModel();
+
+		List list = model.search(null, 2, 0);
+
+		Iterator it = list.iterator();
+
+		while (it.hasNext()) {
+			bean = (MarksheetBean) it.next();
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getRollNo());
+			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getPhysics());
+			System.out.print("\t" + bean.getChemistry());
+			System.out.println("\t" + bean.getMaths());
+		}
 	}
 
 	private static void testFindByPk() throws Exception {
@@ -26,11 +53,21 @@ public class TestMarksheet {
 
 	}
 
-	private static void testSearch() throws Exception {
+	private static void testSearchSimple() throws Exception {
 
 		MarksheetModel model = new MarksheetModel();
-		model.search();
+		List list = model.searchSimple();
+		Iterator it = list.iterator();
 
+		while (it.hasNext()) {
+			MarksheetBean bean = (MarksheetBean) it.next();
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getRollNo());
+			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getPhysics());
+			System.out.print("\t" + bean.getChemistry());
+			System.out.println("\t" + bean.getMaths());
+		}
 	}
 
 	private static void testDelete() throws Exception {

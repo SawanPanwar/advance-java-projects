@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MarksheetModel {
 
@@ -66,7 +68,7 @@ public class MarksheetModel {
 
 	}
 
-	public void search() throws Exception {
+	public List searchSimple() throws Exception {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -76,14 +78,67 @@ public class MarksheetModel {
 
 		ResultSet rs = ps.executeQuery();
 
+		List list = new ArrayList();
+
 		while (rs.next()) {
-			System.out.print(rs.getInt(1));
-			System.out.print("\t" + rs.getInt(2));
-			System.out.print("\t" + rs.getString(3));
-			System.out.print("\t" + rs.getInt(4));
-			System.out.print("\t" + rs.getInt(5));
-			System.out.println("\t" + rs.getInt(6));
+			MarksheetBean bean = new MarksheetBean();
+			bean.setId(rs.getInt(1));
+			bean.setRollNo(rs.getInt(2));
+			bean.setName(rs.getString(3));
+			bean.setPhysics(rs.getInt(4));
+			bean.setChemistry(rs.getInt(5));
+			bean.setMaths(rs.getInt(6));
+			list.add(bean);
 		}
+
+		return list;
+
+	}
+
+	public List search(MarksheetBean bean, int pageNo, int pageSize) throws Exception {
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/advance_practicals", "root", "root");
+
+		StringBuffer sql = new StringBuffer("select * from marksheet where 1=1");
+
+		if (bean != null) {
+
+			if (bean.getId() > 0) {
+				sql.append(" and id = " + bean.getId());
+			}
+
+			if (bean.getName() != null && bean.getName().length() > 0) {
+				sql.append(" and name like '" + bean.getName() + "%'");
+			}
+
+		}
+		if (pageSize > 0) {
+			pageNo = (pageNo - 1) * pageSize;
+			sql.append(" limit " + pageNo + ", " + pageSize);
+		}
+
+		System.out.println("sql => " + sql);
+
+		PreparedStatement ps = conn.prepareStatement(sql.toString());
+
+		ResultSet rs = ps.executeQuery();
+
+		List list = new ArrayList();
+
+		while (rs.next()) {
+			bean = new MarksheetBean();
+			bean.setId(rs.getInt(1));
+			bean.setRollNo(rs.getInt(2));
+			bean.setName(rs.getString(3));
+			bean.setPhysics(rs.getInt(4));
+			bean.setChemistry(rs.getInt(5));
+			bean.setMaths(rs.getInt(6));
+			list.add(bean);
+		}
+
+		return list;
 
 	}
 
@@ -98,7 +153,7 @@ public class MarksheetModel {
 		ps.setInt(1, id);
 
 		ResultSet rs = ps.executeQuery();
-		
+
 		MarksheetBean bean = new MarksheetBean();
 
 		while (rs.next()) {
