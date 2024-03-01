@@ -7,12 +7,23 @@ public class TestMarksheet {
 
 	public static void main(String[] args) throws Exception {
 
-		// testAdd();
+		testAdd();
 		// testUpdate();
 		// testDelete();
 		// testSearchSimple();
 		// testFindByPk();
-		testSearch();
+		// testSearch();
+		// testNextPk();
+
+	}
+
+	private static void testNextPk() throws Exception {
+
+		MarksheetModel model = new MarksheetModel();
+
+		int pk = model.nextPk();
+
+		System.out.println("pk = " + pk);
 
 	}
 
@@ -94,7 +105,7 @@ public class TestMarksheet {
 	private static void testAdd() throws Exception {
 
 		MarksheetBean bean = new MarksheetBean();
-		bean.setId(11);
+		//bean.setId(11);
 		bean.setRollNo(111);
 		bean.setName("hhh");
 		bean.setPhysics(78);
