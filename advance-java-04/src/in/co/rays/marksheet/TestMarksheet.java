@@ -7,12 +7,12 @@ public class TestMarksheet {
 
 	public static void main(String[] args) throws Exception {
 
-		testAdd();
+		//testAdd();
 		// testUpdate();
 		// testDelete();
 		// testSearchSimple();
 		// testFindByPk();
-		// testSearch();
+		 testSearch();
 		// testNextPk();
 
 	}
@@ -35,7 +35,7 @@ public class TestMarksheet {
 
 		MarksheetModel model = new MarksheetModel();
 
-		List list = model.search(null, 2, 0);
+		List list = model.search(bean, 1, 5);
 
 		Iterator it = list.iterator();
 
