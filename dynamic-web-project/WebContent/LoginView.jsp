@@ -7,16 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="UserRegistrationCtl" method="post">
+	<form action="LoginCtl" method="post">
 		<table>
-			<tr>
-				<th>First Name :</th>
-				<td><input type="text" name="firstName"></td>
-			</tr>
-			<tr>
-				<th>Last Name :</th>
-				<td><input type="text" name="lastName"></td>
-			</tr>
 			<tr>
 				<th>Login ID :</th>
 				<td><input type="text" name="loginId"></td>
@@ -24,14 +16,6 @@
 			<tr>
 				<th>Password :</th>
 				<td><input type="text" name="password"></td>
-			</tr>
-			<tr>
-				<th>DOB :</th>
-				<td><input type="date" name="dob"></td>
-			</tr>
-			<tr>
-				<th>Address :</th>
-				<td><input type="text" name="address"></td>
 			</tr>
 			<tr>
 				<th></th>

@@ -15,8 +15,28 @@ public class TestUser {
 		// testUpdate();
 		// testDelete();
 		// testFindByPk();
-		testSearch();
+		// testSearch();
+		testAuthenticate();
 
+	}
+
+	private static void testAuthenticate() throws Exception {
+
+		UserModel model = new UserModel();
+
+		UserBean bean = model.authenticate("ab@gmail.com", "123");
+
+		if(bean != null) {
+			System.out.println(bean.getId());
+			System.out.println(bean.getFirstName());
+			System.out.println(bean.getLastName());
+			System.out.println(bean.getLoginId());
+			System.out.println(bean.getPassword());
+			System.out.println(bean.getDob());
+			System.out.println(bean.getAddress());
+		}else {
+			System.out.println("invalid login & password");
+		}
 	}
 
 	private static void testSearch() throws Exception {
