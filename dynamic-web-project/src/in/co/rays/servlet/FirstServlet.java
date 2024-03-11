@@ -1,8 +1,8 @@
 package in.co.rays.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,47 +14,30 @@ public class FirstServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("in FirstServlet doGet");
 
-		resp.setContentType("text/html");
+		System.out.println("FirstServlet doGet");
 
-		PrintWriter out = resp.getWriter();
+		// resp.sendRedirect("SecondServlet");
 
-		out.println("<h1>My First Servlet...!!!!</h1>");
+		RequestDispatcher rd = req.getRequestDispatcher("SecondServlet");
+		rd.forward(req, resp);
 
-		out.close();
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("in FirstServlet doPost");
 
-		String fname = req.getParameter("firstName");
-		String lname = req.getParameter("lastName");
-		String login = req.getParameter("loginId");
-		String pass = req.getParameter("password");
-		String dob = req.getParameter("dob");
-		String address = req.getParameter("address");
+		System.out.println("FirstServlet doPost");
 
-		resp.setContentType("text/html");
+		System.out.println("FirstServlet firstName = " + req.getParameter("firstName"));
 
-		PrintWriter out = resp.getWriter();
+		req.setAttribute("lastName", "xyz");
 
-		out.println("<h1>My First Servlet...!!!!</h1>");
+		// resp.sendRedirect("SecondServlet");
 
-		out.println("fname = " + fname);
+		RequestDispatcher rd = req.getRequestDispatcher("SecondServlet");
+		rd.forward(req, resp);
 
-		out.println("lname = " + lname);
-
-		out.println("login = " + login);
-
-		out.println("pass = " + pass);
-
-		out.println("dob = " + dob);
-
-		out.println("address = " + address);
-
-		out.close();
 	}
 
 }

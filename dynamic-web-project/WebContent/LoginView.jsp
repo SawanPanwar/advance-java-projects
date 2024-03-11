@@ -7,7 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%
+		String msg = (String) request.getAttribute("msg");
+	%>
+
 	<form action="LoginCtl" method="post">
+
+		<%
+			if (msg != null) {
+		%>
+		<%=msg%>
+		<%
+			}
+		%>
+
 		<table>
 			<tr>
 				<th>Login ID :</th>

@@ -2,6 +2,7 @@ package in.co.rays.ctl;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,10 @@ public class LoginCtl extends HttpServlet {
 			if (bean != null) {
 				resp.sendRedirect("Welcome.jsp");
 			} else {
-				resp.sendRedirect("LoginView.jsp");
+				//resp.sendRedirect("LoginView.jsp");
+				req.setAttribute("msg", "login id & password is invalid");
+				RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
+				rd.forward(req, resp);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
