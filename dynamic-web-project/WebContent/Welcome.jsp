@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.bean.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -7,8 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<h1>Welcome msg...!!!</h1>
-
+	<%@include file="Header.jsp"%>
+	<h3>Welcome to Advance Java...!!!</h3>
 </body>
 </html>
