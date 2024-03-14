@@ -14,8 +14,15 @@
 		Iterator it = list.iterator();
 	%>
 	<%@include file="Header.jsp"%>
-	<form action="">
+	<form action="UserListCtl" method="post">
 
+		<table>
+			<tr>
+				<td><input type="text" name="firstName"></td>
+				<td><input type="submit" name="operation" value="search"></td>
+				<td><input type="submit" name="operation" value="add"></td>
+			</tr>
+		</table>
 		<table border="1%">
 			<tr>
 				<th>Id</th>
