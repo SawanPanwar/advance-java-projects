@@ -10,6 +10,11 @@
 </head>
 <body>
 	<%
+		int pageNo = (int) request.getAttribute("pageNo");
+		int index = ((pageNo - 1) * 5) + 1;
+
+		List nextList = (List) request.getAttribute("nextList");
+
 		List list = (List) request.getAttribute("list");
 		Iterator it = list.iterator();
 	%>
@@ -19,13 +24,14 @@
 		<table>
 			<tr>
 				<td><input type="text" name="firstName"></td>
+				<td><input type="date" name="dob"></td>
 				<td><input type="submit" name="operation" value="search"></td>
 				<td><input type="submit" name="operation" value="add"></td>
 			</tr>
 		</table>
-		<table border="1%">
+		<table border="1%" style="width: 100%">
 			<tr>
-				<th>Id</th>
+				<th>S.NO.</th>
 				<th>FirstName</th>
 				<th>LastName</th>
 				<th>LoginID</th>
@@ -39,20 +45,27 @@
 					UserBean bean = (UserBean) it.next();
 			%>
 			<tr>
-				<td><%=bean.getId()%></td>
-				<td><%=bean.getFirstName()%></td>
-				<td><%=bean.getLastName()%></td>
-				<td><%=bean.getLoginId()%></td>
-				<td><%=bean.getPassword()%></td>
-				<td><%=bean.getDob()%></td>
-				<td><%=bean.getAddress()%></td>
+				<td align="center"><%=index++%></td>
+				<td align="center"><%=bean.getFirstName()%></td>
+				<td align="center"><%=bean.getLastName()%></td>
+				<td align="center"><%=bean.getLoginId()%></td>
+				<td align="center"><%=bean.getPassword()%></td>
+				<td align="center"><%=bean.getDob()%></td>
+				<td align="center"><%=bean.getAddress()%></td>
 			</tr>
 			<%
 				}
 			%>
-
 		</table>
-
+		<table>
+			<tr>
+				<td><input type="submit" name="operation" value="previous"
+					<%=(pageNo != 1) ? "" : "disabled"%>></td>
+				<td><input type="submit" name="operation" value="next"
+					<%=(nextList.size() != 0) ? "" : "disabled"%>></td>
+			</tr>
+		</table>
+		<input type="hidden" name="pageNo" value="<%=pageNo%>">
 	</form>
 
 </body>
