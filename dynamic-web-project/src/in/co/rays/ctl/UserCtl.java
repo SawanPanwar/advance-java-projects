@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,24 @@ public class UserCtl extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect("UserView.jsp");
+
+		String id = req.getParameter("id");
+
+		UserModel model = new UserModel();
+
+		if (id != null) {
+
+			try {
+				UserBean bean = model.findByPk(Integer.parseInt(id));
+				req.setAttribute("bean", bean);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
+		rd.forward(req, resp);
 	}
 
 	@Override
@@ -32,6 +50,10 @@ public class UserCtl extends HttpServlet {
 		String pass = req.getParameter("password");
 		String dob = req.getParameter("dob");
 		String address = req.getParameter("address");
+		String id = req.getParameter("id");
+		String op = req.getParameter("operation");
+
+		UserModel model = new UserModel();
 
 		UserBean bean = new UserBean();
 		bean.setFirstName(fname);
@@ -45,15 +67,25 @@ public class UserCtl extends HttpServlet {
 		}
 		bean.setAddress(address);
 
-		UserModel model = new UserModel();
+		if (op.equals("save")) {
 
-		try {
-			model.add(bean);
-		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				model.add(bean);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (op.equals("update")) {
+
+			bean.setId(Integer.parseInt(id));
+
+			try {
+				model.update(bean);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		resp.sendRedirect("UserView.jsp");
-
 	}
-
 }
