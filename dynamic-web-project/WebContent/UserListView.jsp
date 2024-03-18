@@ -19,7 +19,7 @@
 		Iterator it = list.iterator();
 	%>
 	<%@include file="Header.jsp"%>
-	<form action="UserListCtl" method="post">
+	<form action="UserListCtl.do" method="post">
 
 		<table>
 			<tr>
@@ -55,7 +55,7 @@
 				<td align="center"><%=bean.getPassword()%></td>
 				<td align="center"><%=bean.getDob()%></td>
 				<td align="center"><%=bean.getAddress()%></td>
-				<td align="center"><a href="UserCtl?id=<%=bean.getId()%>">edit</a></td>
+				<td align="center"><a href="UserCtl.do?id=<%=bean.getId()%>">edit</a></td>
 			</tr>
 			<%
 				}

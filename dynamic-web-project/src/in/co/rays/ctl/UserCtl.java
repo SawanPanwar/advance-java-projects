@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import in.co.rays.bean.UserBean;
 import in.co.rays.model.UserModel;
 
-@WebServlet("/UserCtl")
+@WebServlet("/UserCtl.do")
 public class UserCtl extends HttpServlet {
 
 	@Override
@@ -71,6 +71,7 @@ public class UserCtl extends HttpServlet {
 
 			try {
 				model.add(bean);
+				req.setAttribute("msg", "Data Added Successfully...!!!");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -82,10 +83,14 @@ public class UserCtl extends HttpServlet {
 
 			try {
 				model.update(bean);
+				UserBean existBean = model.findByPk(bean.getId());
+				req.setAttribute("bean", existBean);
+				req.setAttribute("msg", "Data Updated Successfully...!!!");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		resp.sendRedirect("UserView.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
+		rd.forward(req, resp);
 	}
 }

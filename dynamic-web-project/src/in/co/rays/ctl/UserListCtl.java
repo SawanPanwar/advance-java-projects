@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import in.co.rays.bean.UserBean;
 import in.co.rays.model.UserModel;
 
-@WebServlet("/UserListCtl")
+@WebServlet("/UserListCtl.do")
 public class UserListCtl extends HttpServlet {
 
 	@Override
@@ -71,11 +71,13 @@ public class UserListCtl extends HttpServlet {
 		if (op.equals("delete")) {
 			pageNo = 1;
 			String[] ids = req.getParameterValues("ids");
-			for (String id : ids) {
-				try {
-					model.delete(Integer.parseInt(id));
-				} catch (Exception e) {
-					e.printStackTrace();
+			if (ids != null && ids.length > 0) {
+				for (String id : ids) {
+					try {
+						model.delete(Integer.parseInt(id));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 
