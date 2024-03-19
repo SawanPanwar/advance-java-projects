@@ -30,8 +30,13 @@ public class FrontCtl implements Filter {
 
 		HttpSession session = req.getSession();
 
+		String uri = req.getRequestURI();
+
+		System.out.println("uri => " + uri);
+
 		if (session.getAttribute("user") == null) {
 			req.setAttribute("msg", "Session expired...plz login again..!!");
+			req.setAttribute("uri", uri);
 			RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
 			rd.forward(req, resp);
 		} else {

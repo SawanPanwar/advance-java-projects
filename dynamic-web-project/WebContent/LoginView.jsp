@@ -9,6 +9,7 @@
 <body>
 	<%
 		String msg = (String) request.getAttribute("msg");
+		String uri = (String) request.getAttribute("uri");
 		String login = (String) request.getAttribute("login");
 		String pass = (String) request.getAttribute("pass");
 	%>
@@ -31,8 +32,7 @@
 				<td>
 					<%
 						if (login != null) {
-					%> 
-					<%=login%> <%
+					%> <%=login%> <%
  	}
  %>
 				</td>
@@ -53,6 +53,7 @@
 				<td><input type="submit"></td>
 			</tr>
 		</table>
+		<input type="text" name="uri" value="<%=uri%>">
 	</form>
 </body>
 </html>
