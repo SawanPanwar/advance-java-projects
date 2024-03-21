@@ -18,7 +18,7 @@
 		<servlet-name>HelloCtl</servlet-name>
 		<url-pattern>/HelloCtl</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ServletConfigCtl</servlet-name>
 		<servlet-class>in.co.rays.test.ServletConfigCtl</servlet-class>
@@ -36,5 +36,15 @@
 		<servlet-name>ServletConfigCtl</servlet-name>
 		<url-pattern>/ServletConfigCtl</url-pattern>
 	</servlet-mapping>
-	
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/Error404.jsp</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/Error500.jsp</location>
+	</error-page>
+
 </web-app>
