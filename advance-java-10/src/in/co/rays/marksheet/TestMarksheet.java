@@ -1,5 +1,8 @@
 package in.co.rays.marksheet;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class TestMarksheet {
 
 	public static void main(String[] args) throws Exception {
@@ -7,6 +10,7 @@ public class TestMarksheet {
 		// testUpdate();
 		// testDelete();
 		testSearch();
+		// testFindByPk();
 	}
 
 	public static void testAdd() throws Exception {
@@ -47,7 +51,7 @@ public class TestMarksheet {
 
 		MarksheetModel model = new MarksheetModel();
 
-		model.delete(12);
+		model.delete(11);
 
 	}
 
@@ -55,7 +59,41 @@ public class TestMarksheet {
 
 		MarksheetModel model = new MarksheetModel();
 
-		model.search();
+		List list = model.search();
+
+		Iterator it = list.iterator();
+
+		while (it.hasNext()) {
+
+			MarksheetBean bean = (MarksheetBean) it.next();
+
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getRollNo());
+			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getPhysics());
+			System.out.print("\t" + bean.getChemistry());
+			System.out.println("\t" + bean.getMaths());
+
+		}
+
+	}
+
+	public static void testFindByPk() throws Exception {
+
+		MarksheetModel model = new MarksheetModel();
+
+		MarksheetBean bean = model.findByPk(15);
+
+		if (bean != null) {
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getRollNo());
+			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getPhysics());
+			System.out.print("\t" + bean.getChemistry());
+			System.out.println("\t" + bean.getMaths());
+		} else {
+			System.out.println("no record found..!!");
+		}
 
 	}
 
