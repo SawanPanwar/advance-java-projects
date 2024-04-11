@@ -57,15 +57,20 @@ public class TestMarksheet {
 
 	public static void testSearch() throws Exception {
 
+		MarksheetBean bean = new MarksheetBean();
+		bean.setRollNo(104);
+		bean.setId(4);
+		bean.setName("a");
+
 		MarksheetModel model = new MarksheetModel();
 
-		List list = model.search();
+		List list = model.search(null, 0, 5);
 
 		Iterator it = list.iterator();
 
 		while (it.hasNext()) {
 
-			MarksheetBean bean = (MarksheetBean) it.next();
+			bean = (MarksheetBean) it.next();
 
 			System.out.print(bean.getId());
 			System.out.print("\t" + bean.getRollNo());
