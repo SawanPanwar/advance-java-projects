@@ -64,7 +64,7 @@ public class TestMarksheet {
 
 		MarksheetModel model = new MarksheetModel();
 
-		List list = model.search(null, 0, 5);
+		List list = model.search(null, 1, 5);
 
 		Iterator it = list.iterator();
 
