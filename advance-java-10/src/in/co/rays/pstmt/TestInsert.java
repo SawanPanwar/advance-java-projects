@@ -3,7 +3,6 @@ package in.co.rays.pstmt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 
 public class TestInsert {
 
