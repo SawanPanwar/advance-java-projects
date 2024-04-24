@@ -35,7 +35,7 @@ public class TestJDBCDataSource {
 			System.out.println("\t" + rs.getInt(6));
 		}
 
-		conn.close();
+		// conn.close();
 
 	}
 
