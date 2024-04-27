@@ -56,6 +56,36 @@ public class UserModel {
 		System.out.println("Data Inserted = " + i);
 	}
 
+	public UserBean authenticate(String loginId, String password) throws Exception {
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
+
+		String sql = "select * from user where login_id = ? and password = ?";
+
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, loginId);
+		pstmt.setString(2, password);
+
+		ResultSet rs = pstmt.executeQuery();
+
+		UserBean bean = null;
+
+		while (rs.next()) {
+			bean = new UserBean();
+			bean.setId(rs.getInt(1));
+			bean.setFirstName(rs.getString(2));
+			bean.setLastName(rs.getString(3));
+			bean.setLoginId(rs.getString(4));
+			bean.setPassword(rs.getString(5));
+			bean.setDob(rs.getDate(6));
+			bean.setAddress(rs.getString(7));
+		}
+		return bean;
+	}
+
 	public List search(UserBean bean, int pageNo, int pageSize) throws Exception {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
