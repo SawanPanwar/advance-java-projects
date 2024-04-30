@@ -58,6 +58,10 @@ public class UserListCtl extends HttpServlet {
 
 		pageNo = Integer.parseInt(req.getParameter("pageNo"));
 
+		String firstName = req.getParameter("firstName");
+
+		String[] ids = req.getParameterValues("ids");
+
 		String op = req.getParameter("operation");
 
 		if (op.equals("next")) {
@@ -72,10 +76,40 @@ public class UserListCtl extends HttpServlet {
 
 		}
 
+		if (op.equals("add")) {
+
+			resp.sendRedirect("UserCtl");
+
+		}
+
+		if (op.equals("search")) {
+
+			bean = new UserBean();
+			bean.setFirstName(firstName);
+
+		}
+
+		if (op.equals("delete")) {
+
+			if (ids != null && ids.length > 0) {
+
+				for (String id : ids) {
+
+					try {
+						model.delete(Integer.parseInt(id));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				}
+			}
+
+		}
+
 		try {
 			List list = model.search(bean, pageNo, pageSize);
 
-			List nextlist = model.search(null, pageNo + 1, pageSize);
+			List nextlist = model.search(bean, pageNo + 1, pageSize);
 
 			req.setAttribute("list", list);
 			req.setAttribute("nextlist", nextlist);
