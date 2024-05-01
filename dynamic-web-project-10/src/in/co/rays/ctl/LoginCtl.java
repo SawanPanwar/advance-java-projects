@@ -40,31 +40,41 @@ public class LoginCtl extends HttpServlet {
 
 		String password = req.getParameter("password");
 
-		HttpSession session = req.getSession();
+		String op = req.getParameter("operation");
 
-		UserModel model = new UserModel();
+		if (op.equals("signIn")) {
 
-		try {
-			UserBean bean = model.authenticate(loginId, password);
+			HttpSession session = req.getSession();
 
-			if (bean != null) {
+			UserModel model = new UserModel();
 
-				// req.setAttribute("user", bean);
+			try {
+				UserBean bean = model.authenticate(loginId, password);
 
-				// RequestDispatcher rd = req.getRequestDispatcher("Welcome.jsp");
-				// rd.forward(req, resp);
+				if (bean != null) {
 
-				session.setAttribute("user", bean);
+					session.setAttribute("user", bean);
 
-				resp.sendRedirect("Welcome.jsp");
+					// session.setMaxInactiveInterval(30);
 
-			} else {
-				resp.sendRedirect("LoginView.jsp");
+					resp.sendRedirect("Welcome.jsp");
+
+				} else {
+
+					req.setAttribute("msg", "LoginID & password is invalid..!!!");
+
+					RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
+					rd.forward(req, resp);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
+		if (op.equals("signUp")) {
+			resp.sendRedirect("UserRegistrationCtl");
+		}
 	}
 }

@@ -7,8 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<%
+		String msg = (String) request.getAttribute("msg");
+	%>
 	<%@ include file="Header.jsp"%>
 	<form action="LoginCtl" method="post">
+		<%
+			if (msg != null) {
+		%>
+		<h4><%=msg%></h4>
+		<%
+			}
+		%>
 		<table>
 			<tr>
 				<th>LoginId:</th>
@@ -20,7 +31,8 @@
 			</tr>
 			<tr>
 				<th></th>
-				<td><input type="submit" value="signIn"></td>
+				<td><input type="submit" name="operation" value="signIn"><input
+					type="submit" name="operation" value="signUp"></td>
 			</tr>
 		</table>
 	</form>

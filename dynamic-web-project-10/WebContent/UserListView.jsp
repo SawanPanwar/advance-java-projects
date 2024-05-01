@@ -61,7 +61,7 @@
 				<td style="text-align: center;"><%=bean.getDob()%></td>
 				<td style="text-align: center;"><%=bean.getAddress()%></td>
 				<td style="text-align: center;"><a
-					href="UserCtl?id=<%=bean.getId()%>">edit</a></td>
+					href="UserCtl.do?id=<%=bean.getId()%>">edit</a></td>
 			</tr>
 			<%
 				}
