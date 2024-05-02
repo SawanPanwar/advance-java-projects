@@ -40,6 +40,8 @@ public class LoginCtl extends HttpServlet {
 
 		String password = req.getParameter("password");
 
+		String uri = req.getParameter("uri");
+
 		String op = req.getParameter("operation");
 
 		if (op.equals("signIn")) {
@@ -57,7 +59,11 @@ public class LoginCtl extends HttpServlet {
 
 					// session.setMaxInactiveInterval(30);
 
-					resp.sendRedirect("Welcome.jsp");
+					if (uri.equalsIgnoreCase("null")) {
+						resp.sendRedirect("Welcome.jsp");
+					} else {
+						resp.sendRedirect(uri);
+					}
 
 				} else {
 
