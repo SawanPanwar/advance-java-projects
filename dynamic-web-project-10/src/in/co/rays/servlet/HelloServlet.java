@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/HelloServlet")
+@WebServlet(urlPatterns = { "/HelloServlet", "/HiServlet", "/MyServlet", "*.to" })
 public class HelloServlet extends HttpServlet {
 
 	@Override
@@ -22,8 +22,6 @@ public class HelloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		System.out.println("in HelloServlet do post..!!");
-
-		System.out.println(req.getParameter("name"));
 
 	}
 
