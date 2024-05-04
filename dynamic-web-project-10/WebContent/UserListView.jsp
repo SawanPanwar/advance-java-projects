@@ -21,6 +21,7 @@
 		List list = (List) request.getAttribute("list");
 		Iterator it = list.iterator();
 	%>
+	<jsp:useBean id="bean" class="in.co.rays.bean.UserBean" scope="request"></jsp:useBean>
 	<%@ include file="Header.jsp"%>
 	<form action="UserListCtl" method="post">
 		<table>
@@ -48,7 +49,7 @@
 			</tr>
 			<%
 				while (it.hasNext()) {
-					UserBean bean = (UserBean) it.next();
+					bean = (UserBean) it.next();
 			%>
 			<tr>
 				<td style="text-align: center;"><input type="checkbox"
