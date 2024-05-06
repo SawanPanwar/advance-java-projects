@@ -9,8 +9,8 @@ public class TestMarksheet {
 		// testAdd();
 		// testUpdate();
 		// testDelete();
-		testSearch();
-		// testFindByPk();
+		// testSearch();
+		testFindByPk();
 	}
 
 	public static void testAdd() throws Exception {
