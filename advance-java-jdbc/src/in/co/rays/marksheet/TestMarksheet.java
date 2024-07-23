@@ -10,7 +10,6 @@ public class TestMarksheet {
 		// testAdd();
 		// testUpdate();
 		// testDelete();
-		// testRead();
 		// testFindByPk();
 		testSearch();
 
@@ -53,13 +52,6 @@ public class TestMarksheet {
 
 	}
 
-	public static void testRead() throws Exception {
-
-		MarskheetModel model = new MarskheetModel();
-		model.read();
-
-	}
-
 	public static void testFindByPk() throws Exception {
 
 		MarskheetModel model = new MarskheetModel();
@@ -80,23 +72,27 @@ public class TestMarksheet {
 
 	public static void testSearch() throws Exception {
 
+		MarksheetBean bean = new MarksheetBean();
+
+		// bean.setId(1);
+		bean.setName("a");
+
 		MarskheetModel model = new MarskheetModel();
 
-		List list = model.search();
+		List list = model.search(bean, 4, 0);
 
 		Iterator it = list.iterator();
 
 		while (it.hasNext()) {
 
-			MarksheetBean bean = (MarksheetBean) it.next();
+			bean = (MarksheetBean) it.next();
 			System.out.print(bean.getId());
 			System.out.print("\t" + bean.getRollNo());
 			System.out.print("\t" + bean.getName());
 			System.out.print("\t" + bean.getPhysics());
 			System.out.print("\t" + bean.getChemistry());
 			System.out.println("\t" + bean.getMaths());
-
 		}
-
 	}
+
 }
