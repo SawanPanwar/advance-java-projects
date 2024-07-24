@@ -75,7 +75,7 @@ public class TestMarksheet {
 		MarksheetBean bean = new MarksheetBean();
 
 		// bean.setId(1);
-		bean.setName("a");
+		// bean.setName("a");
 
 		MarskheetModel model = new MarskheetModel();
 
