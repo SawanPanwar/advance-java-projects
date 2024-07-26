@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import in.co.rays.exception.DuplicateRecordException;
+
 public class TestUser {
 
 	public static void main(String[] args) throws Exception {
@@ -111,12 +113,11 @@ public class TestUser {
 
 		UserModel model = new UserModel();
 
-		UserBean existBean = model.findByLogin(bean.getLoginId());
-
-		if (existBean != null) {
-			System.out.println("login id already exist..!!");
-		}else {
+		try {
 			model.add(bean);
+		} catch (DuplicateRecordException e) {
+			System.out.println("exception: " + e.getMessage());
 		}
+
 	}
 }
