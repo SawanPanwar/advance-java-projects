@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 
 import in.co.rays.util.JDBCDataSource;
 
-public class TestJDBC {
+public class TestJDBCDataSource {
 
 	public static void main(String[] args) throws Exception {
 
