@@ -1,0 +1,40 @@
+# Steps to run Apache Tomcat:-
+
+-> Apache Tomcat Root Folder -> bin -> double click on startup (windows batch file)
+
+# Steps to stop Apache Tomcat:-
+
+-> Apache Tomcat Root Folder -> bin -> double click on shutdown (windows batch file)
+        or
+-> press -> ctrl + c
+
+# Steps to Change Apache Tomcat Port Number:-
+
+-> Apache Tomcat Root Folder -> conf -> open server.xml on notepad -> find Connector port -> change port number for eg. -> <Connector port="8080" protocol="HTTP/1.1" />
+
+
+======================================================
+
+# Steps to run Wildfly (JBoss):-
+
+-> Wildfly Root Folder -> bin -> double click on standalone (windows batch file)
+
+# Steps to stop Wildfly (JBoss):-
+
+-> press -> ctrl + c and press y
+
+# Steps to Change Wildfly (JBoss) Port Number:-
+
+-> Wildfly (JBoss) Root Folder -> standalone -> configuration -> open standalone.xml on notepad -> find socket-binding -> change port number for eg. -> <socket-binding name="http" port="${jboss.http.port:8080}"/>
+
+======================================================
+
+# Steps to create Dynamic Web Project:-
+
+-> File -> New -> Dynamic Web Project -> give Project Name as your wish -> new runtime -> apache -> choose version 9 -> next -> browse tomcat folder -> finish -> select Dynamic Web Module Version as 3.1 -> next -> edit folder name as src -> put build/classes in default output section -> next -> put WebContent in Content Directory Section -> checked (generate web.xml) -> finish
+
+
+
+
+
+
