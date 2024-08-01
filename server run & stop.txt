@@ -32,9 +32,3 @@
 # Steps to create Dynamic Web Project:-
 
 -> File -> New -> Dynamic Web Project -> give Project Name as your wish -> new runtime -> apache -> choose version 9 -> next -> browse tomcat folder -> finish -> select Dynamic Web Module Version as 3.1 -> next -> edit folder name as src -> put build/classes in default output section -> next -> put WebContent in Content Directory Section -> checked (generate web.xml) -> finish
-
-
-
-
-
-
