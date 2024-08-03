@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<form action="HelloServlet" method="post">
+		<input type="submit">
+	</form>
+
 	<h1>advance-java-web</h1>
 
 	<%

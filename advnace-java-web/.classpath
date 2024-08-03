@@ -12,9 +12,6 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Softwares/Advane Java jars/c3p0-0.9.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Softwares/Advane Java jars/mysql-connector-java-8.0.29.jar"/>
-	<classpathentry kind="lib" path="C:/Softwares/Advane Java jars/mchange-commons-java-0.2.12.jar"/>
-	<classpathentry kind="lib" path="C:/Softwares/Advane Java jars/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

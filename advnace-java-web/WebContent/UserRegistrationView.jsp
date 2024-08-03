@@ -7,8 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="UserData.jsp" method="post">
+	<form action="UserRegistrationCtl" method="post">
+		<%
+			String msg = (String) request.getAttribute("msg");
+		%>
 		<table>
+			<%
+				if (msg != null) {
+			%>
+			<%=msg%>
+			<%
+				}
+			%>
 			<tr>
 				<th>FirstName:</th>
 				<td><input type="text" name="firstName"></td>
