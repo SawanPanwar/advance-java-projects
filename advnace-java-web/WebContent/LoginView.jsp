@@ -8,9 +8,9 @@
 </head>
 <body>
 	<%@ include file="Header.jsp"%>
-	<form action="UserRegistrationCtl" method="post">
+	<form action="LoginCtl" method="post">
 		<div align="center">
-			<h1>User Registration</h1>
+			<h1>Login</h1>
 			<%
 				String msg = (String) request.getAttribute("msg");
 			%>
@@ -25,14 +25,6 @@
 			%>
 			<table>
 				<tr>
-					<th>FirstName:</th>
-					<td><input type="text" name="firstName"></td>
-				</tr>
-				<tr>
-					<th>LastName:</th>
-					<td><input type="text" name="lastName"></td>
-				</tr>
-				<tr>
 					<th>LoginID:</th>
 					<td><input type="text" name="loginId"></td>
 				</tr>
@@ -41,16 +33,9 @@
 					<td><input type="text" name="password"></td>
 				</tr>
 				<tr>
-					<th>DOB:</th>
-					<td><input type="date" name="dob" style="width: 97%"></td>
-				</tr>
-				<tr>
-					<th>Address:</th>
-					<td><input type="text" name="address"></td>
-				</tr>
-				<tr>
 					<td></td>
-					<td><input type="submit" value="signUp"></td>
+					<td><input type="submit" name="operation" value="signIn">
+						<input type="submit" name="operation" value="signUp"></td>
 				</tr>
 			</table>
 		</div>
