@@ -46,14 +46,9 @@ public class UserCtl extends HttpServlet {
 		String dob = req.getParameter("dob");
 		String address = req.getParameter("address");
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String op = req.getParameter("operation");
 
-		System.out.println(firstName);
-		System.out.println(lastName);
-		System.out.println(loginId);
-		System.out.println(password);
-		System.out.println(dob);
-		System.out.println(address);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		UserBean bean = new UserBean();
 		bean.setFirstName(firstName);
@@ -69,11 +64,26 @@ public class UserCtl extends HttpServlet {
 
 		UserModel model = new UserModel();
 
-		try {
-			model.add(bean);
-			req.setAttribute("msg", "User Added Successfully..!!");
-		} catch (Exception e) {
-			req.setAttribute("msg", e.getMessage());
+		if (op.equals("save")) {
+			try {
+				model.add(bean);
+				req.setAttribute("msg", "User Added Successfully..!!");
+			} catch (Exception e) {
+				req.setAttribute("msg", e.getMessage());
+			}
+		}
+
+		if (op.equals("update")) {
+			try {
+				String id = req.getParameter("id");
+				bean.setId(Integer.parseInt(id));
+				model.update(bean);
+				bean = model.findByPk(bean.getId());
+				req.setAttribute("bean", bean);
+				req.setAttribute("msg", "User Updated Successfully..!!");
+			} catch (Exception e) {
+				req.setAttribute("msg", e.getMessage());
+			}
 		}
 
 		RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");

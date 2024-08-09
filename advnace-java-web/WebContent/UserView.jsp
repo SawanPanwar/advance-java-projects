@@ -10,10 +10,20 @@
 	<%@ include file="Header.jsp"%>
 	<form action="UserCtl" method="post">
 		<div align="center">
-			<h1>Add User</h1>
 			<%
 				String msg = (String) request.getAttribute("msg");
 				UserBean bean = (UserBean) request.getAttribute("bean");
+			%>
+			<%
+				if (bean != null && bean.getId() > 0) {
+			%>
+			<h1>Update User</h1>
+			<%
+				} else {
+			%>
+			<h1>Add User</h1>
+			<%
+				}
 			%>
 			<%
 				if (msg != null) {
@@ -25,6 +35,11 @@
 				}
 			%>
 			<table>
+				<tr>
+					<th></th>
+					<td><input type="hidden" name="id"
+						value="<%=(bean != null) ? bean.getId() : ""%>"></td>
+				</tr>
 				<tr>
 					<th>FirstName:</th>
 					<td><input type="text" name="firstName"
@@ -58,7 +73,8 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" value="save"></td>
+					<td><input type="submit" name="operation"
+						value="<%=(bean != null) ? "update" : "save"%>"></td>
 				</tr>
 			</table>
 		</div>
