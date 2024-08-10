@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.bean.MarksheetBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -8,20 +9,20 @@
 </head>
 <body>
 	<%@ include file="Header.jsp"%>
-	<form action="UserCtl.do" method="post">
+	<form action="MarksheetCtl.do" method="post">
 		<div align="center">
 			<%
 				String msg = (String) request.getAttribute("msg");
-				UserBean bean = (UserBean) request.getAttribute("bean");
+				MarksheetBean bean = (MarksheetBean) request.getAttribute("bean");
 			%>
 			<%
 				if (bean != null && bean.getId() > 0) {
 			%>
-			<h1>Update User</h1>
+			<h1>Update Marksheet</h1>
 			<%
 				} else {
 			%>
-			<h1>Add User</h1>
+			<h1>Add Marksheet</h1>
 			<%
 				}
 			%>
@@ -41,35 +42,30 @@
 						value="<%=(bean != null) ? bean.getId() : ""%>"></td>
 				</tr>
 				<tr>
-					<th>FirstName:</th>
-					<td><input type="text" name="firstName"
-						value="<%=(bean != null) ? bean.getFirstName() : ""%>"></td>
+					<th>Roll No.:</th>
+					<td><input type="number" name="rollNo"
+						value="<%=(bean != null) ? bean.getRollNo() : ""%>"></td>
 				</tr>
 				<tr>
-					<th>LastName:</th>
-					<td><input type="text" name="lastName"
-						value="<%=(bean != null) ? bean.getLastName() : ""%>"></td>
+					<th>Name:</th>
+					<td><input type="text" name="name"
+						value="<%=(bean != null) ? bean.getName() : ""%>"></td>
 				</tr>
 				<tr>
-					<th>LoginID:</th>
-					<td><input type="text" name="loginId"
-						value="<%=(bean != null) ? bean.getLoginId() : ""%>"></td>
+					<th>Physics:</th>
+					<td><input type="number" name="physics"
+						value="<%=(bean != null) ? bean.getPhysics() : ""%>"></td>
 				</tr>
 				<tr>
-					<th>Password:</th>
-					<td><input type="text" name="password"
-						value="<%=(bean != null) ? bean.getPassword() : ""%>"></td>
+					<th>Chemistry:</th>
+					<td><input type="number" name="chemistry"
+						value="<%=(bean != null) ? bean.getChemistry() : ""%>"></td>
 				</tr>
 				<tr>
-					<th>DOB:</th>
-					<td><input type="date" name="dob"
-						value="<%=(bean != null) ? bean.getDob() : ""%>"
+					<th>Maths:</th>
+					<td><input type="number" name="maths"
+						value="<%=(bean != null) ? bean.getMaths() : ""%>"
 						style="width: 97%"></td>
-				</tr>
-				<tr>
-					<th>Address:</th>
-					<td><input type="text" name="address"
-						value="<%=(bean != null) ? bean.getAddress() : ""%>"></td>
 				</tr>
 				<tr>
 					<td></td>

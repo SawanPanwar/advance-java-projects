@@ -1,7 +1,6 @@
 package in.co.rays.ctl;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -11,11 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import in.co.rays.bean.UserBean;
-import in.co.rays.model.UserModel;
+import in.co.rays.bean.MarksheetBean;
+import in.co.rays.model.MarksheetModel;
 
-@WebServlet("/UserCtl.do")
-public class UserCtl extends HttpServlet {
+@WebServlet("/MarksheetCtl.do")
+public class MarksheetCtl extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,51 +22,46 @@ public class UserCtl extends HttpServlet {
 		String id = req.getParameter("id");
 
 		if (id != null) {
-			UserModel model = new UserModel();
+			MarksheetModel model = new MarksheetModel();
 			try {
-				UserBean bean = model.findByPk(Integer.parseInt(id));
+				MarksheetBean bean = model.findByPk(Integer.parseInt(id));
 				req.setAttribute("bean", bean);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
-		RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("MarksheetView.jsp");
 		rd.forward(req, resp);
+
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String firstName = req.getParameter("firstName");
-		String lastName = req.getParameter("lastName");
-		String loginId = req.getParameter("loginId");
-		String password = req.getParameter("password");
-		String dob = req.getParameter("dob");
-		String address = req.getParameter("address");
+		String rollNo = req.getParameter("rollNo");
+		String name = req.getParameter("name");
+		String physics = req.getParameter("physics");
+		String chemistry = req.getParameter("chemistry");
+		String maths = req.getParameter("maths");
 
 		String op = req.getParameter("operation");
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-		UserBean bean = new UserBean();
-		bean.setFirstName(firstName);
-		bean.setLastName(lastName);
-		bean.setLoginId(loginId);
-		bean.setPassword(password);
-		try {
-			bean.setDob(sdf.parse(dob));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		bean.setAddress(address);
+		MarksheetBean bean = new MarksheetBean();
+		bean.setRollNo(Integer.parseInt(rollNo));
+		bean.setName(name);
+		bean.setPhysics(Integer.parseInt(physics));
+		bean.setChemistry(Integer.parseInt(chemistry));
+		bean.setMaths(Integer.parseInt(maths));
 
-		UserModel model = new UserModel();
+		MarksheetModel model = new MarksheetModel();
 
 		if (op.equals("save")) {
 			try {
 				model.add(bean);
-				req.setAttribute("msg", "User Added Successfully..!!");
+				req.setAttribute("msg", "Marksheet Added Successfully..!!");
 			} catch (Exception e) {
 				req.setAttribute("msg", e.getMessage());
 			}
@@ -80,13 +74,15 @@ public class UserCtl extends HttpServlet {
 				model.update(bean);
 				bean = model.findByPk(bean.getId());
 				req.setAttribute("bean", bean);
-				req.setAttribute("msg", "User Updated Successfully..!!");
+				req.setAttribute("msg", "Marksheet Updated Successfully..!!");
 			} catch (Exception e) {
 				req.setAttribute("msg", e.getMessage());
 			}
 		}
 
-		RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("MarksheetView.jsp");
 		rd.forward(req, resp);
+
 	}
+
 }

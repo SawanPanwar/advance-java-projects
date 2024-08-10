@@ -12,9 +12,23 @@ import javax.servlet.http.HttpSession;
 
 import in.co.rays.bean.UserBean;
 import in.co.rays.model.UserModel;
+import in.co.rays.util.DataValidator;
 
 @WebServlet("/LoginCtl")
 public class LoginCtl extends HttpServlet {
+
+	public boolean validate(HttpServletRequest req) {
+		boolean checked = true;
+		if (DataValidator.isNull(req.getParameter("loginId"))) {
+			req.setAttribute("loginId", "login is required");
+			checked = false;
+		}
+		if (DataValidator.isNull(req.getParameter("password"))) {
+			req.setAttribute("password", "password is required");
+			checked = false;
+		}
+		return checked;
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,6 +49,16 @@ public class LoginCtl extends HttpServlet {
 		String loginId = req.getParameter("loginId");
 		String password = req.getParameter("password");
 		String op = req.getParameter("operation");
+		String uri = req.getParameter("uri");
+
+		if (op.equals("signUp")) {
+			resp.sendRedirect("UserRegistrationCtl");
+		}
+
+		if (!validate(req)) {
+			RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
+			rd.forward(req, resp);
+		}
 
 		if (op.equals("signIn")) {
 
@@ -46,7 +70,11 @@ public class LoginCtl extends HttpServlet {
 				UserBean bean = model.authenticate(loginId, password);
 				if (bean != null) {
 					session.setAttribute("user", bean);
-					resp.sendRedirect("WelcomeCtl");
+					if (uri.equalsIgnoreCase("null")) {
+						resp.sendRedirect("WelcomeCtl");
+					} else {
+						resp.sendRedirect(uri);
+					}
 				} else {
 					req.setAttribute("msg", "Login ID & Password is invalid");
 					RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
@@ -55,12 +83,6 @@ public class LoginCtl extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
-		}
-
-		if (op.equals("signUp")) {
-			resp.sendRedirect("UserRegistrationCtl");
 		}
 	}
-
 }

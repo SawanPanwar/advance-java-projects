@@ -1,7 +1,6 @@
 package in.co.rays.ctl;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -12,11 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import in.co.rays.bean.UserBean;
-import in.co.rays.model.UserModel;
+import in.co.rays.bean.MarksheetBean;
+import in.co.rays.model.MarksheetModel;
 
-@WebServlet("/UserListCtl.do")
-public class UserListCtl extends HttpServlet {
+@WebServlet("/MarksheetListCtl.do")
+public class MarksheetListCtl extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,7 +24,7 @@ public class UserListCtl extends HttpServlet {
 
 		int pageSize = 5;
 
-		UserModel model = new UserModel();
+		MarksheetModel model = new MarksheetModel();
 
 		try {
 			List list = model.search(null, pageNo, pageSize);
@@ -35,7 +34,7 @@ public class UserListCtl extends HttpServlet {
 			req.setAttribute("nextList", nextList);
 			req.setAttribute("pageNo", pageNo);
 
-			RequestDispatcher rd = req.getRequestDispatcher("UserListView.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("MarksheetListView.jsp");
 			rd.forward(req, resp);
 
 		} catch (Exception e) {
@@ -50,8 +49,7 @@ public class UserListCtl extends HttpServlet {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		String op = req.getParameter("operation");
-		String firstName = req.getParameter("firstName");
-		String dob = req.getParameter("dob");
+		String name = req.getParameter("name");
 
 		int pageNo = 1;
 
@@ -59,19 +57,14 @@ public class UserListCtl extends HttpServlet {
 
 		int pageSize = 5;
 
-		UserBean bean = null;
+		MarksheetBean bean = null;
 
-		UserModel model = new UserModel();
+		MarksheetModel model = new MarksheetModel();
 
 		if (op.equals("search")) {
 			pageNo = 1;
-			bean = new UserBean();
-			bean.setFirstName(firstName);
-			try {
-				bean.setDob(sdf.parse(dob));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			bean = new MarksheetBean();
+			bean.setName(name);
 		}
 
 		if (op.equals("previous")) {
@@ -83,7 +76,7 @@ public class UserListCtl extends HttpServlet {
 		}
 
 		if (op.equals("add")) {
-			resp.sendRedirect("UserCtl.do");
+			resp.sendRedirect("MarksheetCtl.do");
 		}
 
 		if (op.equals("delete")) {
@@ -113,7 +106,7 @@ public class UserListCtl extends HttpServlet {
 			req.setAttribute("nextList", nextList);
 			req.setAttribute("pageNo", pageNo);
 
-			RequestDispatcher rd = req.getRequestDispatcher("UserListView.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("MarksheetListView.jsp");
 			rd.forward(req, resp);
 
 		} catch (Exception e) {
@@ -121,4 +114,5 @@ public class UserListCtl extends HttpServlet {
 		}
 
 	}
+
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import in.co.rays.bean.MarksheetBean;
 import in.co.rays.util.JDBCDataSource;
 
-public class MarskheetModel {
+public class MarksheetModel {
 
 	public Integer nextPk() throws Exception {
 

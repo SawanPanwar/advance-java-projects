@@ -13,6 +13,9 @@
 			<h1>Login</h1>
 			<%
 				String msg = (String) request.getAttribute("msg");
+				String uri = (String) request.getAttribute("uri");
+				String loginId = (String) request.getAttribute("loginId");
+				String password = (String) request.getAttribute("password");
 			%>
 			<%
 				if (msg != null) {
@@ -27,10 +30,14 @@
 				<tr>
 					<th>LoginID:</th>
 					<td><input type="text" name="loginId"></td>
+					<td><font color="red"> <%=(loginId != null) ? loginId : ""%>
+					</font></td>
 				</tr>
 				<tr>
 					<th>Password:</th>
 					<td><input type="text" name="password"></td>
+					<td><font color="red"> <%=(password != null) ? password : ""%>
+					</font></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -39,6 +46,7 @@
 				</tr>
 			</table>
 		</div>
+		<input type="hidden" name="uri" value="<%=uri%>">
 	</form>
 </body>
 </html>

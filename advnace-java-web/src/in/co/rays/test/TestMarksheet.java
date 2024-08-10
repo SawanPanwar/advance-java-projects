@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import in.co.rays.bean.MarksheetBean;
-import in.co.rays.model.MarskheetModel;
+import in.co.rays.model.MarksheetModel;
 
 public class TestMarksheet {
 
@@ -28,7 +28,7 @@ public class TestMarksheet {
 		bean.setChemistry(20);
 		bean.setMaths(30);
 
-		MarskheetModel model = new MarskheetModel();
+		MarksheetModel model = new MarksheetModel();
 		model.add(bean);
 
 	}
@@ -43,21 +43,21 @@ public class TestMarksheet {
 		bean.setChemistry(20);
 		bean.setMaths(30);
 
-		MarskheetModel model = new MarskheetModel();
+		MarksheetModel model = new MarksheetModel();
 		model.update(bean);
 
 	}
 
 	public static void testDelete() throws Exception {
 
-		MarskheetModel model = new MarskheetModel();
+		MarksheetModel model = new MarksheetModel();
 		model.delete(13);
 
 	}
 
 	public static void testFindByPk() throws Exception {
 
-		MarskheetModel model = new MarskheetModel();
+		MarksheetModel model = new MarksheetModel();
 		MarksheetBean bean = model.findByPk(19);
 
 		if (bean != null) {
@@ -80,7 +80,7 @@ public class TestMarksheet {
 		// bean.setId(1);
 		// bean.setName("a");
 
-		MarskheetModel model = new MarskheetModel();
+		MarksheetModel model = new MarksheetModel();
 
 		List list = model.search(null, 0, 0);
 
