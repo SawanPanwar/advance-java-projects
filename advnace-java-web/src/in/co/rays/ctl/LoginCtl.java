@@ -55,34 +55,32 @@ public class LoginCtl extends HttpServlet {
 			resp.sendRedirect("UserRegistrationCtl");
 		}
 
-		if (!validate(req)) {
-			RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
-			rd.forward(req, resp);
-		}
-
 		if (op.equals("signIn")) {
 
-			UserModel model = new UserModel();
+			if (validate(req)) {
 
-			HttpSession session = req.getSession();
+				UserModel model = new UserModel();
 
-			try {
-				UserBean bean = model.authenticate(loginId, password);
-				if (bean != null) {
-					session.setAttribute("user", bean);
-					if (uri.equalsIgnoreCase("null")) {
-						resp.sendRedirect("WelcomeCtl");
+				HttpSession session = req.getSession();
+
+				try {
+					UserBean bean = model.authenticate(loginId, password);
+					if (bean != null) {
+						session.setAttribute("user", bean);
+						if (uri.equalsIgnoreCase("null")) {
+							resp.sendRedirect("WelcomeCtl");
+						} else {
+							resp.sendRedirect(uri);
+						}
 					} else {
-						resp.sendRedirect(uri);
+						req.setAttribute("msg", "Login ID & Password is invalid");
 					}
-				} else {
-					req.setAttribute("msg", "Login ID & Password is invalid");
-					RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
-					rd.forward(req, resp);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
+			RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
+			rd.forward(req, resp);
 		}
 	}
 }

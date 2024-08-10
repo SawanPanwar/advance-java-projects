@@ -62,7 +62,6 @@ public class UserRegistrationCtl extends HttpServlet {
 			req.setAttribute("msg", e.getMessage());
 		}
 
-		// resp.sendRedirect("UserRegistrationView.jsp");
 		RequestDispatcher rd = req.getRequestDispatcher("UserRegistrationView.jsp");
 		rd.forward(req, resp);
 
