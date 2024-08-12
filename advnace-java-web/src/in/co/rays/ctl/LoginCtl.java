@@ -20,7 +20,7 @@ public class LoginCtl extends HttpServlet {
 	public boolean validate(HttpServletRequest req) {
 		boolean checked = true;
 		if (DataValidator.isNull(req.getParameter("loginId"))) {
-			req.setAttribute("loginId", "login is required");
+			req.setAttribute("loginId", "login id is required");
 			checked = false;
 		}
 		if (DataValidator.isNull(req.getParameter("password"))) {
@@ -63,6 +63,8 @@ public class LoginCtl extends HttpServlet {
 
 				HttpSession session = req.getSession();
 
+				// session.setMaxInactiveInterval(30);
+
 				try {
 					UserBean bean = model.authenticate(loginId, password);
 					if (bean != null) {
@@ -72,6 +74,7 @@ public class LoginCtl extends HttpServlet {
 						} else {
 							resp.sendRedirect(uri);
 						}
+						return;
 					} else {
 						req.setAttribute("msg", "Login ID & Password is invalid");
 					}
