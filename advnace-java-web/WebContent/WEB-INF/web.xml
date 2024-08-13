@@ -8,4 +8,42 @@
 	<welcome-file-list>
 		<welcome-file>LoginView.jsp</welcome-file>
 	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>HelloServlet</servlet-name>
+		<servlet-class>in.co.rays.servlet.HelloServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>HelloServlet</servlet-name>
+		<url-pattern>/HelloServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ServletConfigCtl</servlet-name>
+		<servlet-class>in.co.rays.servlet.ServletConfigCtl</servlet-class>
+		<init-param>
+			<param-name>driver</param-name>
+			<param-value>com.mysql.cj.jdbc.Driver</param-value>
+		</init-param>
+		<init-param>
+			<param-name>url</param-name>
+			<param-value>jdbc:mysql://localhost:3306/sunrays</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ServletConfigCtl</servlet-name>
+		<url-pattern>/ServletConfigCtl</url-pattern>
+	</servlet-mapping>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/Error404.jsp</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/Error500.jsp</location>
+	</error-page>
 </web-app>
