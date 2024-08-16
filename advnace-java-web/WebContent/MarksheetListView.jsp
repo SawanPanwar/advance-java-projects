@@ -65,7 +65,7 @@
 				<td align="center"><%=bean.getPhysics()%></td>
 				<td align="center"><%=bean.getChemistry()%></td>
 				<td align="center"><%=bean.getMaths()%></td>
-				<td align="center"><a href="MarksheetCtl?id=<%=bean.getId()%>">edit</a></td>
+				<td align="center"><a href="MarksheetCtl.do?id=<%=bean.getId()%>">edit</a></td>
 			</tr>
 			<%
 				}

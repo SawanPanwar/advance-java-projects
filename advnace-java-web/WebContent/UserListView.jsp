@@ -69,7 +69,7 @@
 				<td align="center"><%=bean.getPassword()%></td>
 				<td align="center"><%=bean.getDob()%></td>
 				<td align="center"><%=bean.getAddress()%></td>
-				<td align="center"><a href="UserCtl?id=<%=bean.getId()%>">edit</a></td>
+				<td align="center"><a href="UserCtl.do?id=<%=bean.getId()%>">edit</a></td>
 			</tr>
 			<%
 				}

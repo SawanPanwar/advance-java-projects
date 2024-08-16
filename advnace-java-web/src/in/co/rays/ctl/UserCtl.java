@@ -22,10 +22,12 @@ public class UserCtl extends HttpServlet {
 
 		String id = req.getParameter("id");
 
+		UserBean bean = null;
+
 		if (id != null) {
 			UserModel model = new UserModel();
 			try {
-				UserBean bean = model.findByPk(Integer.parseInt(id));
+				bean = model.findByPk(Integer.parseInt(id));
 				req.setAttribute("bean", bean);
 			} catch (Exception e) {
 				e.printStackTrace();
