@@ -7,11 +7,12 @@ public class TestMarksheet {
 
 	public static void main(String[] args) throws Exception {
 
-		testAdd();
+		// testAdd();
 		// testUpdate();
 		// testDelete();
 		// testFindByPk();
-		// testSearch();
+
+		testReadAll();
 
 	}
 
@@ -27,7 +28,6 @@ public class TestMarksheet {
 
 		MarskheetModel model = new MarskheetModel();
 		model.add(bean);
-
 	}
 
 	public static void testUpdate() throws Exception {
@@ -42,7 +42,6 @@ public class TestMarksheet {
 
 		MarskheetModel model = new MarskheetModel();
 		model.update(bean);
-
 	}
 
 	public static void testDelete() throws Exception {
@@ -55,6 +54,7 @@ public class TestMarksheet {
 	public static void testFindByPk() throws Exception {
 
 		MarskheetModel model = new MarskheetModel();
+
 		MarksheetBean bean = model.findByPk(15);
 
 		if (bean != null) {
@@ -67,25 +67,22 @@ public class TestMarksheet {
 		} else {
 			System.out.println("id not found");
 		}
-
 	}
 
-	public static void testSearch() throws Exception {
-
-		MarksheetBean bean = new MarksheetBean();
-
-		// bean.setId(1);
-		// bean.setName("a");
+	public static void testReadAll() throws Exception {
 
 		MarskheetModel model = new MarskheetModel();
 
-		List list = model.search(bean, 4, 0);
+		List list = model.readAll();
 
 		Iterator it = list.iterator();
 
 		while (it.hasNext()) {
 
-			bean = (MarksheetBean) it.next();
+			Object obj = it.next();
+
+			MarksheetBean bean = (MarksheetBean) obj;
+
 			System.out.print(bean.getId());
 			System.out.print("\t" + bean.getRollNo());
 			System.out.print("\t" + bean.getName());
@@ -94,5 +91,4 @@ public class TestMarksheet {
 			System.out.println("\t" + bean.getMaths());
 		}
 	}
-
 }

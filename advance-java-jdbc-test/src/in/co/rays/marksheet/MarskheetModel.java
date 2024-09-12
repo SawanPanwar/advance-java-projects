@@ -9,31 +9,11 @@ import java.util.List;
 
 public class MarskheetModel {
 
-	public Integer nextPk() throws Exception {
-
-		int pk = 0;
-
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
-
-		PreparedStatement pstmt = conn.prepareStatement("select max(id) from marksheet");
-
-		ResultSet rs = pstmt.executeQuery();
-
-		while (rs.next()) {
-
-			pk = rs.getInt(1);
-
-		}
-		return pk + 1;
-	}
-
 	public void add(MarksheetBean bean) throws Exception {
 
 		MarksheetBean existBean = findByRoll(bean.getRollNo());
-		
-		if(existBean != null) {
+
+		if (existBean != null) {
 			throw new RuntimeException("roll no. already exist");
 		}
 
@@ -53,7 +33,6 @@ public class MarskheetModel {
 		int i = pstmt.executeUpdate();
 
 		System.out.println("data inserted => " + i);
-
 	}
 
 	public void update(MarksheetBean bean) throws Exception {
@@ -75,7 +54,6 @@ public class MarskheetModel {
 		int i = pstmt.executeUpdate();
 
 		System.out.println("data updated => " + i);
-
 	}
 
 	public void delete(int id) throws Exception {
@@ -92,34 +70,6 @@ public class MarskheetModel {
 
 		System.out.println("data deleted => " + i);
 
-	}
-
-	public int sum(int a, int b) {
-		int c = a + b;
-		System.out.println("sum = " + c);
-		return c;
-	}
-
-	public void read() throws Exception {
-
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
-
-		PreparedStatement pstmt = conn.prepareStatement("select * from marksheet");
-
-		ResultSet rs = pstmt.executeQuery();
-
-		while (rs.next()) {
-
-			System.out.print(rs.getInt(1));
-			System.out.print("\t" + rs.getInt(2));
-			System.out.print("\t" + rs.getString(3));
-			System.out.print("\t" + rs.getInt(4));
-			System.out.print("\t" + rs.getInt(5));
-			System.out.println("\t" + rs.getInt(6));
-
-		}
 	}
 
 	public MarksheetBean findByPk(int id) throws Exception {
@@ -174,40 +124,40 @@ public class MarskheetModel {
 		return bean;
 	}
 
-	public List search(MarksheetBean bean, int pageNo, int pageSize) throws Exception {
+	public void read() throws Exception {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
 
-		StringBuffer sql = new StringBuffer("select * from marksheet where 1=1");
+		PreparedStatement pstmt = conn.prepareStatement("select * from marksheet");
 
-		if (bean != null) {
+		ResultSet rs = pstmt.executeQuery();
 
-			if (bean.getId() > 0) {
-				sql.append(" and id = " + bean.getId());
-			}
-
-			if (bean.getName() != null && bean.getName().length() > 0) {
-				sql.append(" and name like '" + bean.getName() + "%'");
-			}
+		while (rs.next()) {
+			System.out.print(rs.getInt(1));
+			System.out.print("\t" + rs.getInt(2));
+			System.out.print("\t" + rs.getString(3));
+			System.out.print("\t" + rs.getInt(4));
+			System.out.print("\t" + rs.getInt(5));
+			System.out.println("\t" + rs.getInt(6));
 		}
+	}
 
-		if (pageSize > 0) {
-			pageNo = (pageNo - 1) * pageSize;
-			sql.append(" limit " + pageNo + ", " + pageSize);
-		}
+	public List readAll() throws Exception {
 
-		System.out.println("sql => " + sql);
+		Class.forName("com.mysql.cj.jdbc.Driver");
 
-		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
+
+		PreparedStatement pstmt = conn.prepareStatement("select * from marksheet");
 
 		ResultSet rs = pstmt.executeQuery();
 
 		List list = new ArrayList();
 
 		while (rs.next()) {
-			bean = new MarksheetBean();
+			MarksheetBean bean = new MarksheetBean();
 			bean.setId(rs.getInt(1));
 			bean.setRollNo(rs.getInt(2));
 			bean.setName(rs.getString(3));
