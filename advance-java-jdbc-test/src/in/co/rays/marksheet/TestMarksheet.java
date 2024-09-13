@@ -12,7 +12,9 @@ public class TestMarksheet {
 		// testDelete();
 		// testFindByPk();
 
-		testReadAll();
+		// testReadAll();
+
+		testSearch();
 
 	}
 
@@ -82,6 +84,33 @@ public class TestMarksheet {
 			Object obj = it.next();
 
 			MarksheetBean bean = (MarksheetBean) obj;
+
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getRollNo());
+			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getPhysics());
+			System.out.print("\t" + bean.getChemistry());
+			System.out.println("\t" + bean.getMaths());
+		}
+	}
+
+	public static void testSearch() throws Exception {
+
+		MarksheetBean bean = new MarksheetBean();
+
+		bean.setName("v");
+
+		bean.setRollNo(101);
+
+		MarskheetModel model = new MarskheetModel();
+
+		List list = model.search2(bean, 1, 5);
+
+		Iterator it = list.iterator();
+
+		while (it.hasNext()) {
+
+			bean = (MarksheetBean) it.next();
 
 			System.out.print(bean.getId());
 			System.out.print("\t" + bean.getRollNo());
