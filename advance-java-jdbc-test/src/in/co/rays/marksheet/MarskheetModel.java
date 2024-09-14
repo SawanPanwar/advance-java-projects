@@ -202,7 +202,7 @@ public class MarskheetModel {
 			}
 
 			if (bean.getRollNo() > 0) {
-				sql.append(" where roll_no = " + bean.getRollNo());
+				sql.append(" and roll_no = " + bean.getRollNo());
 			}
 
 		}
