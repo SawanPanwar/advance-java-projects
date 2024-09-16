@@ -54,6 +54,12 @@ public class MarskheetModel {
 	}
 
 	public void update(MarksheetBean bean) throws Exception {
+		
+		MarksheetBean existBean = findByRoll(bean.getRollNo());
+
+		if (existBean != null && bean.getRollNo() != existBean.getRollNo()) {
+			throw new RuntimeException("roll no. already exist");
+		}
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 

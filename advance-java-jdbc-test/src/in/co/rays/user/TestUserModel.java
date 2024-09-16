@@ -8,7 +8,7 @@ public class TestUserModel {
 
 	public static void main(String[] args) throws Exception {
 
-		// testAdd();
+		testAdd();
 
 		// testUpdate();
 
@@ -16,13 +16,13 @@ public class TestUserModel {
 
 		// testFindByPk();
 
-		testSearch();
+		// testSearch();
 	}
 
 	private static void testSearch() throws Exception {
 
 		UserBean bean = new UserBean();
-		
+
 		bean.setFirstName("a");
 
 		UserModel model = new UserModel();
@@ -73,17 +73,12 @@ public class TestUserModel {
 
 	private static void testUpdate() throws Exception {
 
-		UserBean bean = new UserBean();
-
-		bean.setId(15);
-		bean.setFirstName("aaa");
-		bean.setLastName("aaa");
-		bean.setLoginId("aaa@gmail.com");
-		bean.setPassword("1234");
-		bean.setDob(new Date());
-		bean.setAddress("indore");
-
 		UserModel model = new UserModel();
+
+		UserBean bean = model.findByPk(14);
+
+		bean.setFirstName("kkk");
+		bean.setLastName("ppp");
 
 		model.update(bean);
 
@@ -93,18 +88,22 @@ public class TestUserModel {
 
 		UserBean bean = new UserBean();
 
-		bean.setId(15);
+		// bean.setId(15);
 		bean.setFirstName("aaa");
 		bean.setLastName("bbb");
-		bean.setLoginId("aaa@gmail.com");
+		bean.setLoginId("aa@gmail.com");
 		bean.setPassword("1234");
 		bean.setDob(new Date());
 		bean.setAddress("indore");
 
-		UserModel model = new UserModel();
+		try {
+			UserModel model = new UserModel();
 
-		model.add(bean);
+			model.add(bean);
 
+		} catch (Exception e) {
+			System.out.println("exception: " + e.getMessage());
+		}
 	}
 
 }

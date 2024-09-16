@@ -9,7 +9,31 @@ import java.util.List;
 
 public class UserModel {
 
+	public Integer nextPk() throws Exception {
+
+		int pk = 0;
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
+
+		PreparedStatement pstmt = conn.prepareStatement("select max(id) from user");
+
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			pk = rs.getInt(1);
+		}
+		return pk + 1;
+	}
+
 	public void add(UserBean bean) throws Exception {
+
+		UserBean existBean = findByLogin(bean.getLoginId());
+
+		if (existBean != null) {
+			throw new RuntimeException("login id already exist..!!");
+		}
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -17,7 +41,7 @@ public class UserModel {
 
 		PreparedStatement pstmt = conn.prepareStatement("insert into user values(?, ?, ?, ?, ?, ?, ?)");
 
-		pstmt.setInt(1, bean.getId());
+		pstmt.setInt(1, nextPk());
 		pstmt.setString(2, bean.getFirstName());
 		pstmt.setString(3, bean.getLastName());
 		pstmt.setString(4, bean.getLoginId());
@@ -32,6 +56,12 @@ public class UserModel {
 	}
 
 	public void update(UserBean bean) throws Exception {
+
+		UserBean existBean = findByLogin(bean.getLoginId());
+
+		if (existBean != null && bean.getId() != existBean.getId()) {
+			throw new RuntimeException("login id already exist..!!");
+		}
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
