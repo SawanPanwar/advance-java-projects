@@ -1,4 +1,4 @@
-package com.rays.test;
+package in.co.rays.test;
 
 public class TestPerson {
 
