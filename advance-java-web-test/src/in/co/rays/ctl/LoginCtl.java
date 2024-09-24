@@ -31,7 +31,9 @@ public class LoginCtl extends HttpServlet {
 		try {
 			UserBean bean = model.authenticate(loginId, password);
 			if (bean != null) {
-				resp.sendRedirect("Welcome.jsp");
+				req.setAttribute("user", bean);
+				RequestDispatcher rd = req.getRequestDispatcher("Welcome.jsp");
+				rd.forward(req, resp);
 			} else {
 				req.setAttribute("msg", "login id & password invalid");
 				RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");

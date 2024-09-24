@@ -8,15 +8,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="Header.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<div align="center">
-		<h1>Welcome to Dynamic Web Project</h1>
-	</div>
+	<%
+		UserBean user = (UserBean) request.getAttribute("user");
+	%>
+	<%
+		if (user != null) {
+	%>
+	<h3>
+		Hi,
+		<%=user.getFirstName()%></h3>
+	<%
+		} else {
+	%>
+	<h3>Hi, Guest</h3>
+	<%
+		}
+	%>
+	<hr>
 </body>
 </html>
