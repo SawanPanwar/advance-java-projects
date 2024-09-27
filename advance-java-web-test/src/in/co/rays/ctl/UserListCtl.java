@@ -66,6 +66,23 @@ public class UserListCtl extends HttpServlet {
 			pageNo--;
 		}
 
+		if (op.equals("add")) {
+			resp.sendRedirect("UserCtl");
+		}
+
+		if (op.equals("delete")) {
+			String[] ids = req.getParameterValues("ids");
+			if (ids != null && ids.length > 0) {
+				for (String id : ids) {
+					try {
+						model.delete(Integer.parseInt(id));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
 		try {
 			List list = model.search(bean, pageNo, pageSize);
 			req.setAttribute("list", list);

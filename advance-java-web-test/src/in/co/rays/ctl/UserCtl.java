@@ -19,13 +19,27 @@ public class UserCtl extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect("UserView.jsp");
+		String id = req.getParameter("id");
+
+		UserModel model = new UserModel();
+
+		if (id != null) {
+			try {
+				UserBean bean = model.findByPk(Integer.parseInt(id));
+				req.setAttribute("bean", bean);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
+		rd.forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		UserBean bean = new UserBean();
 		bean.setFirstName(req.getParameter("firstName"));
@@ -43,7 +57,7 @@ public class UserCtl extends HttpServlet {
 
 		try {
 			model.add(bean);
-			req.setAttribute("msg", "user registered successfully...!!!");
+			req.setAttribute("msg", "User Added Successfully...!!!");
 			RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
 			rd.forward(req, resp);
 		} catch (Exception e) {
