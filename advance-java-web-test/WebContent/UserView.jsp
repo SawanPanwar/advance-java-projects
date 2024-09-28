@@ -8,7 +8,7 @@
 </head>
 <body>
 	<%@ include file="Header.jsp"%>
-	<form action="UserCtl" method="post">
+	<form action="UserCtl.do" method="post">
 		<div align="center">
 			<%
 				String msg = (String) request.getAttribute("msg");
@@ -35,6 +35,8 @@
 				}
 			%>
 			<table>
+				<input type="hidden" name="id"
+					value="<%=(bean != null && bean.getId() > 0) ? bean.getId() : ""%>">
 				<tr>
 					<th>First Name:</th>
 					<td><input type="text" name="firstName"
@@ -67,7 +69,7 @@
 				</tr>
 				<tr>
 					<th></th>
-					<td><input type="submit"
+					<td><input type="submit" name="operation"
 						value="<%=(bean != null && bean.getId() > 0) ? "update" : "save"%>"></td>
 				</tr>
 			</table>

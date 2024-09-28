@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import in.co.rays.bean.UserBean;
 import in.co.rays.model.UserModel;
 
-@WebServlet("/UserListCtl")
+@WebServlet("/UserListCtl.do")
 public class UserListCtl extends HttpServlet {
 
 	@Override
@@ -67,7 +67,7 @@ public class UserListCtl extends HttpServlet {
 		}
 
 		if (op.equals("add")) {
-			resp.sendRedirect("UserCtl");
+			resp.sendRedirect("UserCtl.do");
 		}
 
 		if (op.equals("delete")) {
