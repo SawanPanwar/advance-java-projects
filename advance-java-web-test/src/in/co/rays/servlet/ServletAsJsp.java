@@ -1,6 +1,7 @@
 package in.co.rays.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = { "/FirstServlet", "/First", "*.abc" })
-public class FirstServlet extends HttpServlet {
+@WebServlet("/ServletAsJsp")
+public class ServletAsJsp extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("in first servlet do get method");
-	}
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("in first servlet do post method");
+		resp.setContentType("text/html");
+
+		PrintWriter out = resp.getWriter();
+
+		out.println("<font color='green' ><h1>Servlet as JSP</h1></font>");
+
+		out.close();
+
 	}
 
 }

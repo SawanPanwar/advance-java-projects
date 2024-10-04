@@ -9,10 +9,14 @@
 <body>
 	<%@ include file="Header.jsp"%>
 	<form action="UserCtl.do" method="post">
+
+		<jsp:useBean id="bean" class="in.co.rays.bean.UserBean"
+			scope="request"></jsp:useBean>
+
 		<div align="center">
 			<%
 				String msg = (String) request.getAttribute("msg");
-				UserBean bean = (UserBean) request.getAttribute("bean");
+						/* UserBean bean = (UserBean) request.getAttribute("bean"); */
 			%>
 			<%
 				if (bean != null && bean.getId() > 0) {
