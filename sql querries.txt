@@ -1,0 +1,389 @@
+mysql> show databases;
+
+mysql> create database advance_java;
+
+mysql> use advance_java;
+
+mysql> show tables;
+
+mysql> create table emp(id int, name varchar(50), salary int);
+
+mysql> select * from emp;
+
+mysql> insert into emp values(1, 'abc', 1000);
+
+mysql> insert into emp(id, name) values(2, 'xyz');
+
+mysql> update emp set salary = 5500 where id = 1;
+
+mysql> delete from emp where id = 2;
+
+mysql> select * from emp where id = 1;
+
+mysql> select id from emp;
+
+mysql> select id, name from emp;
+
+mysql> select name, id from emp;
+
+mysql> drop table emp;
+
+mysql> drop database advance_java;
+
+mysql> alter table emp add salary int;
+
+=================================================
+
+# Primary Key with table creation:
+
+mysql> create table emp(id int primary key, name varchar(50), salary int);
+
+=================================================
+
+# Primary Key after table creation:
+
+mysql> create table emp(id int, name varchar(50), salary int);
+
+mysql> alter table emp add primary key(id);
+
+
+================================================
+
+# foreign key without on update cascade & on delete cascade
+
+mysql> create table emp(id int primary key, name varchar(50), salary int);
+
+mysql> create table dept(id int primary key, dept_name varchar(50));
+
+mysql> alter table emp add dept_id int;
+
+mysql> alter table emp add foreign key(dept_id) references dept(id);
+
+mysql> drop table emp;
+
+mysql> drop table dept;
+
+=================================================
+
+# foreign key with on update cascade & on delete cascade
+
+mysql> create table emp(id int primary key, name varchar(50), salary int);
+
+mysql> create table dept(id int primary key, dept_name varchar(50));
+
+mysql> alter table emp add dept_id int;
+
+mysql> alter table emp add foreign key(dept_id) references dept(id) on update cascade on delete cascade;
+
+mysql> drop table emp;
+
+mysql> drop table dept;
+
+=================================================
+
+# foreign in single sql querry with on update cascade & on delete cascade
+
+mysql> create table dept(id int primary key, dept_name varchar(50));
+
+mysql> create table emp(id int primary key, name varchar(50), salary int, dept_id int, foreign key(dept_id) references dept(id) on update cascade on delete cascade);
+
+====================================================
+
+mysql> use advance_java;
+
+mysql> drop table emp;
+
+mysql> dropm table dept;
+
+mysql> create table emp(id int primary key, name varchar(50), salary int);
+
+mysql> select max(salary) from emp;
+
+mysql> select min(salary) from emp;
+
+mysql> select sum(salary) from emp;
+
+mysql> select count(salary) from emp;
+
+mysql> select count(*) from emp;
+
+mysql> select * from emp;
+
+mysql> select * from emp order by salary;
+
+mysql> select * from emp order by salary desc;
+
+mysql> select * from emp order by name;
+
+mysql> select * from emp order by name desc;
+
+mysql> select * from emp where id = 1;
+
+mysql> select * from emp where name = 'abc';
+
+mysql> select * from emp where name = 'a';
+
+mysql> select * from emp where name like 'a';
+
+mysql> select * from emp where name like 'a%';
+
+===========================================
+
+# limit
+
+mysql> select * from emp;
+
+mysql> select * from emp limit 0, 2;
+
+mysql> select * from emp limit limit 2, 2;
+
+=============================================
+
+# second highest with limit and without limit
+
+mysql> select * from emp;
+
+mysql> select max(salary) from emp;
+
+mysql> select * from emp;
+
+mysql> select * from emp order by salary;
+
+mysql> select * from emp order by salary desc;
+
+mysql> select * from emp order by salary desc limit 0, 1;
+
+mysql> select * from emp order by salary desc limit 1, 1;
+
+mysql> select * from emp order by salary desc limit 0, 2;
+
+mysql> select max(salary) from emp;
+
+mysql> select max(salary) from emp where salary < (select max(salary) from emp);
+
+mysql> select * from emp where salary = (select max(salary) from emp where salary < (select max(salary) from emp));
+
+=======================
+
+# aliases
+
+mysql> select emp.id as emp_id, name, salary from emp;
+
+mysql> select emp.id as emp_id, name as emp_name, salary as emp_salary from emp;
+
+mysql> select e.id as emp_id, name as emp_name, salary as emp_salary from emp as e;
+
+mysql> select e.id  emp_id, name emp_name, salary emp_salary from emp e;
+
+mysql> select e.id as emp_id, name as emp_name, salary as emp_salary, d.id as dept_id, name as dept_namee from emp as e, dept as d;
+
+=============================
+
+# joins
+
+mysql> select * from emp;
++----+-----------+--------+
+| id | name      | salary |
++----+-----------+--------+
+|  1 | abc       |   1000 |
+|  2 | xyz       |    100 |
+|  3 | pqr       |    700 |
+|  4 | vinjan    |   1700 |
+|  5 | suraj     |   1100 |
+|  6 | priya     |   2100 |
+|  7 | madhumita |   1200 |
++----+-----------+--------+
+
+mysql> select * from dept;
++-----+-----------+
+| id  | dept_name |
++-----+-----------+
+|   1 | sales     |
+|   2 | marketing |
+|   3 | it        |
+| 100 | accounts  |
++-----+-----------+
+
+mysql> select * from emp inner join dept on emp.id = dept.id;
++----+------+--------+----+-----------+
+| id | name | salary | id | dept_name |
++----+------+--------+----+-----------+
+|  1 | abc  |   1000 |  1 | sales     |
+|  2 | xyz  |    100 |  2 | marketing |
+|  3 | pqr  |    700 |  3 | it        |
++----+------+--------+----+-----------+
+
+mysql> select * from emp left join dept on emp.id = dept.id;
++----+-----------+--------+------+-----------+
+| id | name      | salary | id   | dept_name |
++----+-----------+--------+------+-----------+
+|  1 | abc       |   1000 |    1 | sales     |
+|  2 | xyz       |    100 |    2 | marketing |
+|  3 | pqr       |    700 |    3 | it        |
+|  4 | vinjan    |   1700 | NULL | NULL      |
+|  5 | suraj     |   1100 | NULL | NULL      |
+|  6 | priya     |   2100 | NULL | NULL      |
+|  7 | madhumita |   1200 | NULL | NULL      |
++----+-----------+--------+------+-----------+
+
+mysql> select * from emp right join dept on emp.id = dept.id;
++------+------+--------+-----+-----------+
+| id   | name | salary | id  | dept_name |
++------+------+--------+-----+-----------+
+|    1 | abc  |   1000 |   1 | sales     |
+|    2 | xyz  |    100 |   2 | marketing |
+|    3 | pqr  |    700 |   3 | it        |
+| NULL | NULL |   NULL | 100 | accounts  |
++------+------+--------+-----+-----------+
+
+mysql> select * from emp left join dept on emp.id = dept.id union select * from emp right join dept on emp.id = dept.id;
++------+-----------+--------+------+-----------+
+| id   | name      | salary | id   | dept_name |
++------+-----------+--------+------+-----------+
+|    1 | abc       |   1000 |    1 | sales     |
+|    2 | xyz       |    100 |    2 | marketing |
+|    3 | pqr       |    700 |    3 | it        |
+|    4 | vinjan    |   1700 | NULL | NULL      |
+|    5 | suraj     |   1100 | NULL | NULL      |
+|    6 | priya     |   2100 | NULL | NULL      |
+|    7 | madhumita |   1200 | NULL | NULL      |
+| NULL | NULL      |   NULL |  100 | accounts  |
++------+-----------+--------+------+-----------+
+
+mysql> select * from emp left join dept on emp.id = dept.id where dept.id is null union select * from emp right join dept on emp.id = dept.id where emp.id is null;
++------+-----------+--------+------+-----------+
+| id   | name      | salary | id   | dept_name |
++------+-----------+--------+------+-----------+
+|    4 | vinjan    |   1700 | NULL | NULL      |
+|    5 | suraj     |   1100 | NULL | NULL      |
+|    6 | priya     |   2100 | NULL | NULL      |
+|    7 | madhumita |   1200 | NULL | NULL      |
+| NULL | NULL      |   NULL |  100 | accounts  |
++------+-----------+--------+------+-----------+
+
+===============================================================================
+
+# testing
+
+mysql> select * from emp left join dept on emp.id = dept.id;
++----+-----------+--------+------+-----------+
+| id | name      | salary | id   | dept_name |
++----+-----------+--------+------+-----------+
+|  1 | abc       |   1000 |    1 | sales     |
+|  2 | xyz       |    100 |    2 | marketing |
+|  3 | pqr       |    700 |    3 | it        |
+|  4 | vinjan    |   1700 | NULL | NULL      |
+|  5 | suraj     |   1100 | NULL | NULL      |
+|  6 | priya     |   2100 | NULL | NULL      |
+|  7 | madhumita |   1200 | NULL | NULL      |
++----+-----------+--------+------+-----------+
+
+mysql> select * from emp left join dept on emp.id = dept.id where dept.id is null;
++----+-----------+--------+------+-----------+
+| id | name      | salary | id   | dept_name |
++----+-----------+--------+------+-----------+
+|  4 | vinjan    |   1700 | NULL | NULL      |
+|  5 | suraj     |   1100 | NULL | NULL      |
+|  6 | priya     |   2100 | NULL | NULL      |
+|  7 | madhumita |   1200 | NULL | NULL      |
++----+-----------+--------+------+-----------+
+
+mysql> select * from emp right join dept on emp.id = dept.id;
++------+------+--------+-----+-----------+
+| id   | name | salary | id  | dept_name |
++------+------+--------+-----+-----------+
+|    1 | abc  |   1000 |   1 | sales     |
+|    2 | xyz  |    100 |   2 | marketing |
+|    3 | pqr  |    700 |   3 | it        |
+| NULL | NULL |   NULL | 100 | accounts  |
++------+------+--------+-----+-----------+
+
+mysql> select * from emp right join dept on emp.id = dept.id where emp.id is null;
++------+------+--------+-----+-----------+
+| id   | name | salary | id  | dept_name |
++------+------+--------+-----+-----------+
+| NULL | NULL |   NULL | 100 | accounts  |
++------+------+--------+-----+-----------+
+
+mysql> select * from emp left join dept on emp.id = dept.id where dept.id is null union select * from emp right join dept on emp.id = dept.id where emp.id is null;
++------+-----------+--------+------+-----------+
+| id   | name      | salary | id   | dept_name |
++------+-----------+--------+------+-----------+
+|    4 | vinjan    |   1700 | NULL | NULL      |
+|    5 | suraj     |   1100 | NULL | NULL      |
+|    6 | priya     |   2100 | NULL | NULL      |
+|    7 | madhumita |   1200 | NULL | NULL      |
+| NULL | NULL      |   NULL |  100 | accounts  |
++------+-----------+--------+------+-----------+
+
+================================================================
+
+mysql> select * from marksheet;
++----+---------+-----------+---------+-----------+-------+
+| id | roll_no | name      | physics | chemistry | maths |
++----+---------+-----------+---------+-----------+-------+
+|  1 |     101 | vinjal    |      76 |        78 |    98 |
+|  2 |     102 | suraj     |      78 |        88 |    99 |
+|  3 |     103 | priya     |      67 |        66 |    89 |
+|  4 |     104 | madhumita |      78 |        67 |    89 |
+|  5 |     105 | abc       |      11 |        22 |    33 |
+|  6 |     106 | xyz       |      23 |        43 |    52 |
++----+---------+-----------+---------+-----------+-------+
+
+mysql> select *, (physics + chemistry + maths) as total from marksheet;
++----+---------+-----------+---------+-----------+-------+-------+
+| id | roll_no | name      | physics | chemistry | maths | total |
++----+---------+-----------+---------+-----------+-------+-------+
+|  1 |     101 | vinjal    |      76 |        78 |    98 |   252 |
+|  2 |     102 | suraj     |      78 |        88 |    99 |   265 |
+|  3 |     103 | priya     |      67 |        66 |    89 |   222 |
+|  4 |     104 | madhumita |      78 |        67 |    89 |   234 |
+|  5 |     105 | abc       |      11 |        22 |    33 |    66 |
+|  6 |     106 | xyz       |      23 |        43 |    52 |   118 |
++----+---------+-----------+---------+-----------+-------+-------+
+
+mysql> select *, (physics + chemistry + maths) as total from marksheet order by total;
++----+---------+-----------+---------+-----------+-------+-------+
+| id | roll_no | name      | physics | chemistry | maths | total |
++----+---------+-----------+---------+-----------+-------+-------+
+|  5 |     105 | abc       |      11 |        22 |    33 |    66 |
+|  6 |     106 | xyz       |      23 |        43 |    52 |   118 |
+|  3 |     103 | priya     |      67 |        66 |    89 |   222 |
+|  4 |     104 | madhumita |      78 |        67 |    89 |   234 |
+|  1 |     101 | vinjal    |      76 |        78 |    98 |   252 |
+|  2 |     102 | suraj     |      78 |        88 |    99 |   265 |
++----+---------+-----------+---------+-----------+-------+-------+
+
+mysql> select *, (physics + chemistry + maths) as total from marksheet order by total desc;
++----+---------+-----------+---------+-----------+-------+-------+
+| id | roll_no | name      | physics | chemistry | maths | total |
++----+---------+-----------+---------+-----------+-------+-------+
+|  2 |     102 | suraj     |      78 |        88 |    99 |   265 |
+|  1 |     101 | vinjal    |      76 |        78 |    98 |   252 |
+|  4 |     104 | madhumita |      78 |        67 |    89 |   234 |
+|  3 |     103 | priya     |      67 |        66 |    89 |   222 |
+|  6 |     106 | xyz       |      23 |        43 |    52 |   118 |
+|  5 |     105 | abc       |      11 |        22 |    33 |    66 |
++----+---------+-----------+---------+-----------+-------+-------+
+
+mysql> select *, (physics + chemistry + maths) as total from marksheet order by total desc limit 0, 3;
++----+---------+-----------+---------+-----------+-------+-------+
+| id | roll_no | name      | physics | chemistry | maths | total |
++----+---------+-----------+---------+-----------+-------+-------+
+|  2 |     102 | suraj     |      78 |        88 |    99 |   265 |
+|  1 |     101 | vinjal    |      76 |        78 |    98 |   252 |
+|  4 |     104 | madhumita |      78 |        67 |    89 |   234 |
++----+---------+-----------+---------+-----------+-------+-------+
+
+mysql> select *, (physics + chemistry + maths) as total from marksheet where physics >= 33 and chemistry >= 33 and maths >=33 order by total desc limit 0, 3;
++----+---------+-----------+---------+-----------+-------+-------+
+| id | roll_no | name      | physics | chemistry | maths | total |
++----+---------+-----------+---------+-----------+-------+-------+
+|  2 |     102 | suraj     |      78 |        88 |    99 |   265 |
+|  1 |     101 | vinjal    |      76 |        78 |    98 |   252 |
+|  4 |     104 | madhumita |      78 |        67 |    89 |   234 |
++----+---------+-----------+---------+-----------+-------+-------+
+
+========================================================
+
+mysql> select salary, count(*) from emp group by salary;
