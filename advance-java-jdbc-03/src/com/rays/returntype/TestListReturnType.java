@@ -4,35 +4,38 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-public class TestBeanReturnType {
+public class TestListReturnType {
 
 	public static void main(String[] args) throws Exception {
 
-		// findByPk(2);
+		// testRead1();
 
-		MarksheetBean bean = findByPk2(200);
-		if (bean != null) {
+		List list = testRead2();
+
+		Iterator it = list.iterator();
+
+		while (it.hasNext()) {
+			MarksheetBean bean = (MarksheetBean) it.next();
 			System.out.print(bean.getId());
 			System.out.print("\t" + bean.getRollNo());
 			System.out.print("\t" + bean.getName());
 			System.out.print("\t" + bean.getPhysics());
 			System.out.print("\t" + bean.getChemistry());
 			System.out.println("\t" + bean.getMaths());
-		} else {
-			System.out.println("id not found");
 		}
 	}
 
-	public static void findByPk(int id) throws Exception {
+	public static void testRead1() throws Exception {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
 
-		PreparedStatement pstmt = conn.prepareStatement("select * from marksheet where id = ?");
-
-		pstmt.setInt(1, id);
+		PreparedStatement pstmt = conn.prepareStatement("select * from marksheet");
 
 		ResultSet rs = pstmt.executeQuery();
 
@@ -46,42 +49,17 @@ public class TestBeanReturnType {
 		}
 	}
 
-	public static MarksheetBean findByPk2(int id) throws Exception {
+	public static List testRead2() throws Exception {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
 
-		PreparedStatement pstmt = conn.prepareStatement("select * from marksheet where id = ?");
-
-		pstmt.setInt(1, id);
+		PreparedStatement pstmt = conn.prepareStatement("select * from marksheet");
 
 		ResultSet rs = pstmt.executeQuery();
 
-		MarksheetBean bean = new MarksheetBean();
-
-		while (rs.next()) {
-			bean.setId(rs.getInt(1));
-			bean.setRollNo(rs.getInt(2));
-			bean.setName(rs.getString(3));
-			bean.setPhysics(rs.getInt(4));
-			bean.setChemistry(rs.getInt(5));
-			bean.setMaths(rs.getInt(6));
-		}
-		return bean;
-	}
-
-	public static MarksheetBean findByPk3(int id) throws Exception {
-
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
-
-		PreparedStatement pstmt = conn.prepareStatement("select * from marksheet where id = ?");
-
-		pstmt.setInt(1, id);
-
-		ResultSet rs = pstmt.executeQuery();
+		List list = new ArrayList();
 
 		MarksheetBean bean = null;
 
@@ -93,7 +71,8 @@ public class TestBeanReturnType {
 			bean.setPhysics(rs.getInt(4));
 			bean.setChemistry(rs.getInt(5));
 			bean.setMaths(rs.getInt(6));
+			list.add(bean);
 		}
-		return bean;
+		return list;
 	}
 }
