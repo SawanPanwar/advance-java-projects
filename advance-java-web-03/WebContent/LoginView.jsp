@@ -17,7 +17,9 @@
 			<%
 				if (msg != null) {
 			%>
-			<h3><%=msg%></h3>
+			<h3>
+				<font color="red"><%=msg%></font>
+			</h3>
 			<%
 				}
 			%>
