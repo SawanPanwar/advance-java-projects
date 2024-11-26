@@ -34,7 +34,8 @@
 				</tr>
 				<tr>
 					<th></th>
-					<td><input type="submit" value="signIn"></td>
+					<td><input type="submit" name="operation" value="signIn">
+						&nbsp; <input type="submit" name="operation" value="signUp"></td>
 				</tr>
 			</table>
 		</div>
