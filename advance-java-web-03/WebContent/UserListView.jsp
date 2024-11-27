@@ -11,14 +11,24 @@
 <body>
 	<%
 		List list = (List) request.getAttribute("list");
+		int pageNo = (int) request.getAttribute("pageNo");
 	%>
 	<%@ include file="Header.jsp"%>
-	<form action="">
+	<form action="UserListCtl" method="post">
 		<div align="center">
 			<h1>User List</h1>
 		</div>
+		<table>
+			<tr>
+				<th>FirstName:</th>
+				<td><input type="text" name="firstName"> <input
+					type="submit" name="operation" value="search"></td>
+			</tr>
+		</table>
+		<br>
 		<table border="1%" style="width: 100%">
 			<tr>
+				<th>Select</th>
 				<th>Id</th>
 				<th>FirstName</th>
 				<th>LastName</th>
@@ -33,6 +43,7 @@
 					UserBean bean = (UserBean) it.next();
 			%>
 			<tr align="center">
+				<td><input type="checkbox" name="ids" value="<%=bean.getId()%>"></td>
 				<td><%=bean.getId()%></td>
 				<td><%=bean.getFirstName()%></td>
 				<td><%=bean.getLastName()%></td>
@@ -45,6 +56,21 @@
 				}
 			%>
 		</table>
+		<br>
+		<table style="width: 100%">
+			<tr>
+				<td style="width: 30%"><input type="submit" name="operation"
+					value="previous" <%=(pageNo == 1) ? "disabled" : ""%>></td>
+				<td style="width: 30%"><input type="submit" name="operation"
+					value="add"></td>
+				<td style="width: 25%"><input type="submit" name="operation"
+					value="delete"></td>
+				<td style="text-align: right;"><input type="submit"
+					name="operation" value="next"
+					<%=(list.size() == 0) ? "disabled" : ""%>></td>
+			</tr>
+		</table>
+		<input type="hidden" name="pageNo" value="<%=pageNo%>">
 	</form>
 </body>
 </html>
