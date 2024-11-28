@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.co.rays.bean.UserBean;
+import in.co.rays.exception.DuplicateRecordException;
 import in.co.rays.util.JDBCDataSource;
 
 public class UserModel {
@@ -32,7 +33,13 @@ public class UserModel {
 		return pk + 1;
 	}
 
-	public void add(UserBean bean) throws Exception {
+	public void add(UserBean bean) throws DuplicateRecordException, Exception {
+
+		UserBean existBean = findByLogin(bean.getLoginId());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("Login ID already exist..!!");
+		}
 
 		int pk = nextPk();
 

@@ -14,7 +14,7 @@
 		int pageNo = (int) request.getAttribute("pageNo");
 	%>
 	<%@ include file="Header.jsp"%>
-	<form action="UserListCtl" method="post">
+	<form action="UserListCtl.do" method="post">
 		<div align="center">
 			<h1>User List</h1>
 		</div>
@@ -36,6 +36,7 @@
 				<th>Password</th>
 				<th>DOB</th>
 				<th>Address</th>
+				<th>Edit</th>
 			</tr>
 			<%
 				Iterator it = list.iterator();
@@ -51,6 +52,7 @@
 				<td><%=bean.getPassword()%></td>
 				<td><%=bean.getDob()%></td>
 				<td><%=bean.getAddress()%></td>
+				<td><a href="UserCtl.do?id=<%=bean.getId()%>">edit</a></td>
 			</tr>
 			<%
 				}
