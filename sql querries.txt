@@ -175,7 +175,7 @@ mysql> select e.id as emp_id, name as emp_name, salary as emp_salary from emp as
 
 mysql> select e.id  emp_id, name emp_name, salary emp_salary from emp e;
 
-mysql> select e.id as emp_id, name as emp_name, salary as emp_salary, d.id as dept_id, name as dept_namee from emp as e, dept as d;
+mysql> select e.id as emp_id, name as emp_name, salary as emp_salary, d.id as dept_id, dept_name as dept_namee from emp as e, dept as d where e.dept_id = d.id;
 
 =============================
 
