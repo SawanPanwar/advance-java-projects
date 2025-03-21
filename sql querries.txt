@@ -34,13 +34,13 @@ mysql> alter table emp add salary int;
 
 =================================================
 
-# Primary Key with table creation:
+## Primary Key with table creation:
 
 mysql> create table emp(id int primary key, name varchar(50), salary int);
 
 =================================================
 
-# Primary Key after table creation:
+## Primary Key after table creation:
 
 mysql> create table emp(id int, name varchar(50), salary int);
 
@@ -49,7 +49,7 @@ mysql> alter table emp add primary key(id);
 
 ================================================
 
-# foreign key without on update cascade & on delete cascade
+## foreign key without on update cascade & on delete cascade
 
 mysql> create table emp(id int primary key, name varchar(50), salary int);
 
@@ -65,7 +65,7 @@ mysql> drop table dept;
 
 =================================================
 
-# foreign key with on update cascade & on delete cascade
+## foreign key with on update cascade & on delete cascade
 
 mysql> create table emp(id int primary key, name varchar(50), salary int);
 
@@ -81,7 +81,7 @@ mysql> drop table dept;
 
 =================================================
 
-# foreign in single sql querry with on update cascade & on delete cascade
+## foreign in single sql query with on update cascade & on delete cascade
 
 mysql> create table dept(id int primary key, dept_name varchar(50));
 
@@ -93,7 +93,7 @@ mysql> use advance_java;
 
 mysql> drop table emp;
 
-mysql> dropm table dept;
+mysql> drop table dept;
 
 mysql> create table emp(id int primary key, name varchar(50), salary int);
 
@@ -129,21 +129,17 @@ mysql> select * from emp where name like 'a%';
 
 ===========================================
 
-# limit
+## limit
 
 mysql> select * from emp;
 
 mysql> select * from emp limit 0, 2;
 
-mysql> select * from emp limit limit 2, 2;
+mysql> select * from emp limit 2, 2;
 
 =============================================
 
-# second highest with limit and without limit
-
-mysql> select * from emp;
-
-mysql> select max(salary) from emp;
+## highest salary with limit & without limit
 
 mysql> select * from emp;
 
@@ -163,9 +159,35 @@ mysql> select max(salary) from emp where salary < (select max(salary) from emp);
 
 mysql> select * from emp where salary = (select max(salary) from emp where salary < (select max(salary) from emp));
 
-=======================
+mysql> select * from emp where salary = (select max(salary) from emp where salary < (select max(salary) from emp where salary < (select max(salary) from emp)));
 
-# aliases
+======================================================
+
+## lowest salary with limit & without limit
+
+mysql> select * from emp;
+
+mysql> select * from emp order by salary;
+
+mysql> select * from emp order by salary;
+
+mysql> select * from emp order by salary limit 0, 1;
+
+mysql> select * from emp order by salary limit 1, 1;
+
+mysql> select * from emp order by salary limit 0, 2;
+
+mysql> select min(salary) from emp;
+
+mysql> select min(salary) from emp where salary > (select min(salary) from emp);
+
+mysql> select * from emp where salary = (select min(salary) from emp where salary > (select min(salary) from emp));
+
+mysql> select * from emp where salary = (select min(salary) from emp where salary > (select min(salary) from emp where salary > (select min(salary) from emp)));
+
+======================================================
+
+## aliases
 
 mysql> select emp.id as emp_id, name, salary from emp;
 
@@ -177,9 +199,9 @@ mysql> select e.id  emp_id, name emp_name, salary emp_salary from emp e;
 
 mysql> select e.id as emp_id, name as emp_name, salary as emp_salary, d.id as dept_id, dept_name as dept_namee from emp as e, dept as d where e.dept_id = d.id;
 
-=============================
+======================================================
 
-# joins
+## joins
 
 mysql> select * from emp;
 +----+-----------+--------+
@@ -188,10 +210,6 @@ mysql> select * from emp;
 |  1 | abc       |   1000 |
 |  2 | xyz       |    100 |
 |  3 | pqr       |    700 |
-|  4 | vinjan    |   1700 |
-|  5 | suraj     |   1100 |
-|  6 | priya     |   2100 |
-|  7 | madhumita |   1200 |
 +----+-----------+--------+
 
 mysql> select * from dept;
