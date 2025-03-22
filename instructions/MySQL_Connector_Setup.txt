@@ -1,0 +1,16 @@
+1. Open Chrome browser.  
+2. Go to Maven Repository website: https://mvnrepository.com  
+3. In the search bar, type: MySQL Connector Java  
+4. Click on "MySQL Connector Java" from the search results.  
+5. Select version: 8.0.30  
+6. Go to the "Files" section.  
+7. Click on the JAR file to download it.  
+
+Steps to add JAR to Project Build Path:  
+1. Right-click on your project in Eclipse.  
+2. Select "Build Path" -> "Configure Build Path".  
+3. Navigate to the "Libraries" tab.  
+4. Under "Classpath", click on "Add External JARs".  
+5. Browse and select the downloaded MySQL Connector JAR file.  
+6. Click "Open".  
+7. Click "Apply" and then "Apply & Close".  

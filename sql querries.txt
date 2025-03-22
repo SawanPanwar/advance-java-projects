@@ -336,6 +336,8 @@ mysql> select * from emp left join dept on emp.id = dept.id where dept.id is nul
 
 ================================================================
 
+mysql> create table marksheet(id int primary key, roll_no int, name varchar(30), physics int, chemistry int, maths int);
+
 mysql> select * from marksheet;
 +----+---------+-----------+---------+-----------+-------+
 | id | roll_no | name      | physics | chemistry | maths |
