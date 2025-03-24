@@ -1,8 +1,8 @@
-package in.co.rays.stmt;
+package in.co.rays.pstmt;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 public class TestInsert {
 
@@ -12,10 +12,11 @@ public class TestInsert {
 
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
 
-		Statement stmt = conn.createStatement();
+		PreparedStatement pstmt = conn.prepareStatement("insert into marksheet values(8, 108, 'samay', 19, 22, 34)");
 
-		int i = stmt.executeUpdate("insert into marksheet values(38, 138, 'pushp', 56, 71, 36)");
+		int i = pstmt.executeUpdate();
 
 		System.out.println("data inserted => " + i);
+
 	}
 }

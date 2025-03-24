@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class TestInsert {
+public class TestDelete {
 
 	public static void main(String[] args) throws Exception {
 
@@ -14,8 +14,9 @@ public class TestInsert {
 
 		Statement stmt = conn.createStatement();
 
-		int i = stmt.executeUpdate("insert into marksheet values(38, 138, 'pushp', 56, 71, 36)");
+		int i = stmt.executeUpdate("delete from marksheet where id = 38");
 
-		System.out.println("data inserted => " + i);
+		System.out.println("data deleted => " + i);
+
 	}
 }
