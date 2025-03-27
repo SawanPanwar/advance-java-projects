@@ -17,15 +17,17 @@ public class TestReadDynamic {
 
 		MarksheetBean bean = new MarksheetBean();
 		// bean.setId(1);
-		// bean.setRollNo(101);
+		bean.setRollNo(101);
 		// bean.setName("a");
 		// bean.setPhysics(30);
 		// bean.setChemistry(56);
 		// bean.setMaths(89);
 
-		testRead4(bean);
+		// testRead4(bean);
 
-		// testRead4(bean, 2, 5);
+		// testRead5(bean);
+
+		testRead6(bean, 1, 5);
 	}
 
 	public static void testRead1() throws Exception {
@@ -115,7 +117,6 @@ public class TestReadDynamic {
 		ResultSet rs = pstmt.executeQuery();
 
 		while (rs.next()) {
-
 			System.out.print(rs.getInt(1));
 			System.out.print("\t" + rs.getInt(2));
 			System.out.print("\t" + rs.getString(3));
@@ -161,7 +162,6 @@ public class TestReadDynamic {
 		ResultSet rs = pstmt.executeQuery();
 
 		while (rs.next()) {
-
 			System.out.print(rs.getInt(1));
 			System.out.print("\t" + rs.getInt(2));
 			System.out.print("\t" + rs.getString(3));
@@ -187,7 +187,7 @@ public class TestReadDynamic {
 				sql.append(" and roll_no = " + bean.getRollNo());
 			}
 			if (bean.getName() != null && bean.getName().length() > 0) {
-				sql.append(" and name = " + bean.getName());
+				sql.append(" and name like '" + bean.getName() + "%'");
 			}
 			if (bean.getPhysics() > 0) {
 				sql.append(" and physics = " + bean.getPhysics());
@@ -207,7 +207,56 @@ public class TestReadDynamic {
 		ResultSet rs = pstmt.executeQuery();
 
 		while (rs.next()) {
+			System.out.print(rs.getInt(1));
+			System.out.print("\t" + rs.getInt(2));
+			System.out.print("\t" + rs.getString(3));
+			System.out.print("\t" + rs.getInt(4));
+			System.out.print("\t" + rs.getInt(5));
+			System.out.println("\t" + rs.getInt(6));
+		}
+	}
 
+	public static void testRead6(MarksheetBean bean, int pageNo, int pageSize) throws Exception {
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
+
+		StringBuffer sql = new StringBuffer("select * from marksheet where 1=1");
+
+		if (bean != null) {
+			if (bean.getId() > 0) {
+				sql.append(" and id = " + bean.getId());
+			}
+			if (bean.getRollNo() > 0) {
+				sql.append(" and roll_no = " + bean.getRollNo());
+			}
+			if (bean.getName() != null && bean.getName().length() > 0) {
+				sql.append(" and name like '" + bean.getName() + "%'");
+			}
+			if (bean.getPhysics() > 0) {
+				sql.append(" and physics = " + bean.getPhysics());
+			}
+			if (bean.getChemistry() > 0) {
+				sql.append(" and chemistry = " + bean.getChemistry());
+			}
+			if (bean.getMaths() > 0) {
+				sql.append(" and maths = " + bean.getMaths());
+			}
+		}
+
+		if (pageSize > 0) {
+			pageNo = (pageNo - 1) * pageSize;
+			sql.append(" limit " + pageNo + ", " + pageSize);
+		}
+
+		System.out.println("sql => " + sql);
+
+		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
 			System.out.print(rs.getInt(1));
 			System.out.print("\t" + rs.getInt(2));
 			System.out.print("\t" + rs.getString(3));
