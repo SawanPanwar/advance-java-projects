@@ -7,9 +7,40 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="FormSubmit.jsp">
-		<input type="text" name="firstName"> <input type="text"
-			name="lastName"> <input type="submit">
+	<form action="MyFirstServlet" method="post">
+		<div align="center">
+			<h1>User Regisgtration</h1>
+			<table>
+				<tr>
+					<th>First Name:</th>
+					<td><input type="text" name="firstName"></td>
+				</tr>
+				<tr>
+					<th>Last Name:</th>
+					<td><input type="text" name="lastName"></td>
+				</tr>
+				<tr>
+					<th>Login ID:</th>
+					<td><input type="text" name="loginId"></td>
+				</tr>
+				<tr>
+					<th>Password:</th>
+					<td><input type="text" name="password"></td>
+				</tr>
+				<tr>
+					<th>DOB:</th>
+					<td><input type="date" name="dob" style="width: 98%"></td>
+				</tr>
+				<tr>
+					<th>Address:</th>
+					<td><input type="text" name="address"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit"></td>
+				</tr>
+			</table>
+		</div>
 	</form>
 </body>
 </html>
