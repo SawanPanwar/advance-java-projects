@@ -2,6 +2,7 @@ package in.co.rays.ctl;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +22,9 @@ public class WelcomeCtl extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		resp.sendRedirect("Welcome.jsp");
+		// resp.sendRedirect("Welcome.jsp");
+
+		RequestDispatcher rd = req.getRequestDispatcher("Welcome.jsp");
+		rd.forward(req, resp);
 	}
 }
