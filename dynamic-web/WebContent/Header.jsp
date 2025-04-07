@@ -9,7 +9,7 @@
 </head>
 <body>
 	<%
-		UserBean user = (UserBean) request.getAttribute("user");
+		UserBean user = (UserBean) session.getAttribute("user");
 	%>
 	<%
 		if (user != null) {
@@ -17,8 +17,11 @@
 	<h3>
 		Hi,
 		<%=user.getFirstName()%></h3>
-	<a href="#"><b>Add User</b></a> |
-	<a href="#"><b>User List</b></a>
+	<a href="UserCtl"><b>Add User</b></a>
+	<b>|</b>
+	<a href="UserListCtl"><b>User List</b></a>
+	<b>|</b>
+	<a href="LoginCtl?operation=logout"><b>Logout</b></a>
 	<%
 		} else {
 	%>
