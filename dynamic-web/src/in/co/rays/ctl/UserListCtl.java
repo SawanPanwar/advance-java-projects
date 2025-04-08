@@ -30,7 +30,11 @@ public class UserListCtl extends HttpServlet {
 		try {
 			List list = model.search(bean, pageNo, pageSize);
 
+			List nextList = model.search(bean, pageNo + 1, pageSize);
+
 			req.setAttribute("list", list);
+			req.setAttribute("nextList", nextList);
+			req.setAttribute("pageNo", pageNo);
 
 			RequestDispatcher rd = req.getRequestDispatcher("UserListView.jsp");
 			rd.forward(req, resp);
@@ -38,15 +42,49 @@ public class UserListCtl extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		resp.sendRedirect("UserListView.jsp");
-
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		RequestDispatcher rd = req.getRequestDispatcher("UserListView.jsp");
-		rd.forward(req, resp);
+		UserModel model = new UserModel();
+
+		UserBean bean = null;
+
+		int pageNo = 1;
+
+		int pageSize = 5;
+
+		String op = req.getParameter("operation");
+		pageNo = Integer.parseInt(req.getParameter("pageNo"));
+
+		if (op.equals("previous")) {
+			pageNo--;
+		}
+		if (op.equals("next")) {
+			pageNo++;
+		}
+		if (op.equals("add")) {
+			resp.sendRedirect("UserCtl");
+		}
+		if (op.equals("delete")) {
+
+		}
+
+		try {
+			List list = model.search(bean, pageNo, pageSize);
+
+			List nextList = model.search(bean, pageNo + 1, pageSize);
+
+			req.setAttribute("list", list);
+			req.setAttribute("nextList", nextList);
+			req.setAttribute("pageNo", pageNo);
+
+			RequestDispatcher rd = req.getRequestDispatcher("UserListView.jsp");
+			rd.forward(req, resp);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
