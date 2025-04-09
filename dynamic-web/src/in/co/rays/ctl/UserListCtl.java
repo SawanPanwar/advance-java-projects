@@ -1,6 +1,8 @@
 package in.co.rays.ctl;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -67,8 +69,36 @@ public class UserListCtl extends HttpServlet {
 		if (op.equals("add")) {
 			resp.sendRedirect("UserCtl");
 		}
+		if (op.equals("search")) {
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+			pageNo = 1;
+
+			bean = new UserBean();
+
+			bean.setFirstName(req.getParameter("firstName"));
+			try {
+				bean.setDob(sdf.parse(req.getParameter("dob")));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 		if (op.equals("delete")) {
 
+			pageNo = 1;
+
+			String[] ids = req.getParameterValues("ids");
+
+			if (ids != null && ids.length > 0) {
+				for (String id : ids) {
+					try {
+						model.delete(Integer.parseInt(id));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
 		}
 
 		try {
