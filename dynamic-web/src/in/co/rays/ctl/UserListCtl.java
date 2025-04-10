@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import in.co.rays.bean.UserBean;
 import in.co.rays.model.UserModel;
 
-@WebServlet("/UserListCtl")
+@WebServlet("/UserListCtl.do")
 public class UserListCtl extends HttpServlet {
 
 	@Override
@@ -67,7 +67,7 @@ public class UserListCtl extends HttpServlet {
 			pageNo++;
 		}
 		if (op.equals("add")) {
-			resp.sendRedirect("UserCtl");
+			resp.sendRedirect("UserCtl.do");
 		}
 		if (op.equals("search")) {
 
@@ -98,6 +98,9 @@ public class UserListCtl extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
+				req.setAttribute("msg", "Record Deleted Successfully..!!");
+			} else {
+				req.setAttribute("msg", "Select atleast One Record..!!");
 			}
 		}
 

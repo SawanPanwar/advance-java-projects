@@ -11,6 +11,7 @@
 <body>
 
 	<%
+		String msg = (String) request.getAttribute("msg");
 		List nextList = (List) request.getAttribute("nextList");
 		int pageNo = (int) request.getAttribute("pageNo");
 		int index = ((pageNo - 1) * 5) + 1;
@@ -19,20 +20,33 @@
 	%>
 
 	<%@ include file="Header.jsp"%>
-	<form action="UserListCtl" method="post">
+	<form action="UserListCtl.do" method="post">
 		<div align="center">
 			<h1>User List</h1>
 		</div>
-		<table>
-			<tr>
-				<th>FirstName:</th>
-				<td><input type="text" name="firstName"
-					placeholder="enter first name here">&nbsp; &nbsp;</td>
-				<th>DOB:</th>
-				<td><input type="date" name="dob">&nbsp; &nbsp;</td>
-				<td><input type="submit" name="operation" value="search"></td>
-			</tr>
-		</table>
+		<div align="center">
+			<%
+				if (msg != null) {
+			%>
+			<h3>
+				<font color="green"><%=msg%></font>
+			</h3>
+			<%
+				}
+			%>
+		</div>
+		<div align="center">
+			<table>
+				<tr>
+					<th>FirstName:</th>
+					<td><input type="text" name="firstName"
+						placeholder="enter first name here">&nbsp; &nbsp;</td>
+					<th>DOB:</th>
+					<td><input type="date" name="dob">&nbsp; &nbsp;</td>
+					<td><input type="submit" name="operation" value="search"></td>
+				</tr>
+			</table>
+		</div>
 		<br>
 		<table border="1%" style="width: 100%">
 			<tr>
@@ -59,7 +73,7 @@
 				<td><%=bean.getPassword()%></td>
 				<td><%=bean.getDob()%></td>
 				<td><%=bean.getAddress()%></td>
-				<td><a href="UserCtl?id=<%=bean.getId()%>">edit</a></td>
+				<td><a href="UserCtl.do?id=<%=bean.getId()%>">edit</a></td>
 			</tr>
 			<%
 				}

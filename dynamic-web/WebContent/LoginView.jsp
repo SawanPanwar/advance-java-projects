@@ -11,6 +11,18 @@
 	<form action="LoginCtl" method="post">
 		<div align="center">
 			<h1>Login</h1>
+			<%
+				String msg = (String) request.getAttribute("msg");
+			%>
+			<%
+				if (msg != null) {
+			%>
+			<h3>
+				<font color="red"><%=msg%></font>
+			</h3>
+			<%
+				}
+			%>
 			<table>
 				<tr>
 					<th>Login ID:</th>

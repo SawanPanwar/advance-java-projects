@@ -9,9 +9,10 @@
 <body>
 	<%
 		UserBean bean = (UserBean) request.getAttribute("bean");
+		String msg = (String) request.getAttribute("msg");
 	%>
 	<%@ include file="Header.jsp"%>
-	<form action="UserCtl" method="post">
+	<form action="UserCtl.do" method="post">
 		<div align="center">
 			<%
 				if (bean != null && bean.getId() > 0) {
@@ -24,7 +25,21 @@
 			<%
 				}
 			%>
+			<%
+				if (msg != null) {
+			%>
+			<h3>
+				<font color="green"><%=msg%></font>
+			</h3>
+			<%
+				}
+			%>
 			<table>
+				<tr>
+					<th></th>
+					<td><input type="hidden" name="id"
+						value="<%=(bean != null) ? bean.getId() : ""%>"></td>
+				</tr>
 				<tr>
 					<th>FirstName:</th>
 					<td><input type="text" name="firstName"
