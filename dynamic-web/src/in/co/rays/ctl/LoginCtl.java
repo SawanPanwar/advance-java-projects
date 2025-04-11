@@ -45,6 +45,8 @@ public class LoginCtl extends HttpServlet {
 
 			HttpSession session = req.getSession();
 
+			// session.setMaxInactiveInterval(10);
+
 			try {
 				UserBean bean = model.authenticate(loginId, password);
 				if (bean != null) {
