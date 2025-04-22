@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:useBean id="bean" class="in.co.rays.bean.UserBean" scope="request"></jsp:useBean>
 	<%
-		UserBean bean = (UserBean) request.getAttribute("bean");
+		/* UserBean bean = (UserBean) request.getAttribute("bean"); */
 		String msg = (String) request.getAttribute("msg");
 	%>
 	<%@ include file="Header.jsp"%>
