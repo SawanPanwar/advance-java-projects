@@ -71,7 +71,6 @@ public class TestReadDynamic {
 		ResultSet rs = pstmt.executeQuery();
 
 		while (rs.next()) {
-
 			System.out.print(rs.getInt(1));
 			System.out.print("\t" + rs.getInt(2));
 			System.out.print("\t" + rs.getString(3));
