@@ -9,7 +9,9 @@ public class TestMarksheetModel {
 
 		// testAdd();
 
-		// testUpdate();
+		// testUpdate1();
+
+		// testUpdate2();
 
 		// testDelete();
 
@@ -33,7 +35,7 @@ public class TestMarksheetModel {
 		model.add(bean);
 	}
 
-	public static void testUpdate() throws Exception {
+	public static void testUpdate1() throws Exception {
 
 		MarksheetBean bean = new MarksheetBean();
 		bean.setId(13);
@@ -44,6 +46,17 @@ public class TestMarksheetModel {
 		bean.setMaths(30);
 
 		MarksheetModel model = new MarksheetModel();
+		model.update(bean);
+	}
+
+	public static void testUpdate2() throws Exception {
+
+		MarksheetModel model = new MarksheetModel();
+
+		MarksheetBean bean = model.findByPk(13);
+
+		bean.setName("khushboo");
+
 		model.update(bean);
 	}
 
@@ -95,8 +108,8 @@ public class TestMarksheetModel {
 		MarksheetBean bean = new MarksheetBean();
 //		bean.setRollNo(108);
 //		bean.setName("karan");
-		bean.setPhysics(78);
-		bean.setChemistry(88);
+//		bean.setPhysics(78);
+//		bean.setChemistry(88);
 //		bean.setMaths(99);
 
 		MarksheetModel model = new MarksheetModel();
