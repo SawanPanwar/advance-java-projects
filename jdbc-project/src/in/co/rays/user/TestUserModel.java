@@ -10,13 +10,13 @@ public class TestUserModel {
 
 		// testAdd();
 
-		// testUpdate();
+		testUpdate();
 
 		// testDelete();
 
 		// testFindByPk();
 
-		testFindByLoginId();
+		// testFindByLoginId();
 
 	}
 
@@ -54,9 +54,9 @@ public class TestUserModel {
 		UserBean bean = new UserBean();
 
 		bean.setId(2);
-		bean.setFirstName("Akshat");
+		bean.setFirstName("Akki");
 		bean.setLastName("Saxena");
-		bean.setLoginId("akshat@gmail.com");
+		bean.setLoginId("akki@gmail.com");
 		bean.setPassword("123");
 		bean.setDob(sdf.parse("26-12-2000"));
 		bean.setAddress("Indore");

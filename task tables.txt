@@ -1,0 +1,10 @@
+table: student
+
+# id                   BIGINT PRIMARY KEY       Unique identifier for the student
+# first_name           VARCHAR(45)              First name of the student
+# last_name            VARCHAR(45)              Last name of the student
+# dob                  DATETIME                 Date of birth of the student
+# gender               VARCHAR(45)              Gender of the student
+# mobile_no            VARCHAR(45)              Mobile number of the student
+# email                VARCHAR(255)             Email address of the student
+# college_name         VARCHAR(255)             Name of the college 

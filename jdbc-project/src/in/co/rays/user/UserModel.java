@@ -29,6 +29,12 @@ public class UserModel {
 
 	public void add(UserBean bean) throws Exception {
 
+		UserBean existBean = findByLoginId(bean.getLoginId());
+
+		if (existBean != null) {
+			throw new Exception("Login Id already exist..!!");
+		}
+
 		int pk = nextPk();
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -51,6 +57,12 @@ public class UserModel {
 	}
 
 	public void update(UserBean bean) throws Exception {
+
+		UserBean existBean = findByLoginId(bean.getLoginId());
+
+		if (existBean != null && bean.getId() != existBean.getId()) {
+			throw new Exception("Login Id already exist..!!");
+		}
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
