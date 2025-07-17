@@ -1,0 +1,68 @@
++------------------------------+
+|          BaseBean            |
++------------------------------+
+| - id: long                   |
+| - createdBy: String          |
+| - modifiedBy: String         |
+| - createdDatetime: Timestamp |
+| - modifiedDatetime: Timestamp|
++------------------------------+
+
++------------------------------+
+|          RoleBean            |
++------------------------------+
+| - name: String               |
+| - description: String        |
++------------------------------+
+
++------------------------------+
+|          UserBean            |
++------------------------------+
+| - firstName: String          |
+| - lastName: String           |
+| - login: String              |
+| - password: String           |
+| - confirmPassword: String    |
+| - dob: Date                  |
+| - mobileNo: String           |
+| - roleId: long               |
+| - gender: String             |
++------------------------------+
+
+
+
+
+# ====================================================================================
+#                                  Table: st_role
+# ====================================================================================
+# Column Name          Data Type                Description
+# ------------------------------------------------------------------------------------
+# id                   BIGINT PRIMARY KEY       Unique identifier for the role
+# name                 VARCHAR(45)              Name of the role
+# description          VARCHAR(45)              Description of the role
+# created_by           VARCHAR(45)              User who created the record
+# modified_by          VARCHAR(45)              User who last modified the record
+# created_datetime     DATETIME                 Timestamp of record creation
+# modified_datetime    DATETIME                 Timestamp of last modification
+# ====================================================================================
+
+
+# ====================================================================================
+#                                  Table: st_user
+# ====================================================================================
+# Column Name          Data Type                Description
+# ------------------------------------------------------------------------------------
+# id                   BIGINT PRIMARY KEY       Unique identifier for the user
+# first_name           VARCHAR(45)              First name of the user
+# last_name            VARCHAR(45)              Last name of the user
+# login                VARCHAR(45)              Login username for the user
+# password             VARCHAR(45)              Password for the user
+# dob                  DATETIME                 Date of birth of the user
+# mobile_no            VARCHAR(45)              Mobile number of the user
+# role_id              BIGINT                   Foreign key referencing st_role (role)
+# gender               VARCHAR(45)              Gender of the user
+# created_by           VARCHAR(45)              User who created the record
+# modified_by          VARCHAR(45)              User who last modified the record
+# created_datetime     DATETIME                 Timestamp of record creation
+# modified_datetime    DATETIME                 Timestamp of last modification
+# ====================================================================================
