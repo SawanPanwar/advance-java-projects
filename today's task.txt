@@ -52,6 +52,34 @@
 | - collegeName: String        |
 +------------------------------+
 
++------------------------------+
+|        MarksheetBean         |
++------------------------------+
+| - rollNo: String             |
+| - studentId: long            |
+| - name: String               |
+| - physics: Integer           |
+| - chemistry: Integer         |
+| - maths: Integer             |
++------------------------------+
+
++------------------------------+
+|        CourseBean            |
++------------------------------+
+| - name: String               |
+| - duration: String           |
+| - description: String        |
++------------------------------+
+
++------------------------------+
+|        SubjectBean           |
++------------------------------+
+| - name: String               |
+| - courseId: long             |
+| - courseName: String         |
+| - description: String        |
++------------------------------+
+
 
 
 
@@ -123,6 +151,55 @@
 # email                VARCHAR(255)             Email address of the student
 # college_id           BIGINT                   Foreign key referencing st_college (college)
 # college_name         VARCHAR(255)             Name of the college (denormalized for convenience)
+# created_by           VARCHAR(45)              User who created the record
+# modified_by          VARCHAR(45)              User who last modified the record
+# created_datetime     DATETIME                 Timestamp of record creation
+# modified_datetime    DATETIME                 Timestamp of last modification
+# ====================================================================================
+
+# ====================================================================================
+#                                  Table: st_marksheet
+# ====================================================================================
+# Column Name          Data Type                Description
+# ------------------------------------------------------------------------------------
+# id                   BIGINT PRIMARY KEY       Unique identifier for the marksheet
+# roll_no              VARCHAR(45)              Roll number of the student
+# student_id           BIGINT                   Foreign key referencing st_student (student)
+# name                 VARCHAR(255)             Name of the student (denormalized)
+# physics              INTEGER                  Marks in Physics
+# chemistry            INTEGER                  Marks in Chemistry
+# maths                INTEGER                  Marks in Mathematics
+# created_by           VARCHAR(45)              User who created the record
+# modified_by          VARCHAR(45)              User who last modified the record
+# created_datetime     DATETIME                 Timestamp of record creation
+# modified_datetime    DATETIME                 Timestamp of last modification
+# ====================================================================================
+
+# ====================================================================================
+#                                  Table: st_course
+# ====================================================================================
+# Column Name          Data Type                Description
+# ------------------------------------------------------------------------------------
+# id                   BIGINT PRIMARY KEY       Unique identifier for the course
+# name                 VARCHAR(255)             Name of the course
+# duration             VARCHAR(45)              Duration of the course
+# description          VARCHAR(255)             Description of the course
+# created_by           VARCHAR(45)              User who created the record
+# modified_by          VARCHAR(45)              User who last modified the record
+# created_datetime     DATETIME                 Timestamp of record creation
+# modified_datetime    DATETIME                 Timestamp of last modification
+# ====================================================================================
+
+# ====================================================================================
+#                                  Table: st_subject
+# ====================================================================================
+# Column Name          Data Type                Description
+# ------------------------------------------------------------------------------------
+# id                   BIGINT PRIMARY KEY       Unique identifier for the subject
+# name                 VARCHAR(255)             Name of the subject
+# course_id            BIGINT                   Foreign key referencing st_course (course)
+# course_name          VARCHAR(255)             Name of the course (denormalized)
+# description          VARCHAR(255)             Description of the subject
 # created_by           VARCHAR(45)              User who created the record
 # modified_by          VARCHAR(45)              User who last modified the record
 # created_datetime     DATETIME                 Timestamp of record creation
