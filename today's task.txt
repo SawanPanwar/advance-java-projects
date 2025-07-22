@@ -80,9 +80,41 @@
 | - description: String        |
 +------------------------------+
 
++------------------------------+
+|        TimetableBean         |
++------------------------------+
+| - semester: String           |
+| - description: String        |
+| - examDate: Date             |
+| - examTime: String           |
+| - courseId: long             |
+| - courseName: String         |
+| - subjectId: long            |
+| - subjectName: String        |
++------------------------------+
+
++------------------------------+
+|        FacultyBean           |
++------------------------------+
+| - firstName: String          |
+| - lastName: String           |
+| - dob: Date                  |
+| - gender: String             |
+| - mobileNo: String           |
+| - email: String              |
+| - collegeId: long            |
+| - collegeName: String        |
+| - courseId: long             |
+| - courseName: String         |
+| - subjectId: long            |
+| - subjectName: String        |
++------------------------------+
 
 
 
+# ====================================================================================
+#                                 Database: project04
+# ====================================================================================
 
 # ====================================================================================
 #                                  Table: st_role
@@ -118,7 +150,6 @@
 # created_datetime     DATETIME                 Timestamp of record creation
 # modified_datetime    DATETIME                 Timestamp of last modification
 # ====================================================================================
-
 
 # ====================================================================================
 #                                  Table: st_college
@@ -200,6 +231,50 @@
 # course_id            BIGINT                   Foreign key referencing st_course (course)
 # course_name          VARCHAR(255)             Name of the course (denormalized)
 # description          VARCHAR(255)             Description of the subject
+# created_by           VARCHAR(45)              User who created the record
+# modified_by          VARCHAR(45)              User who last modified the record
+# created_datetime     DATETIME                 Timestamp of record creation
+# modified_datetime    DATETIME                 Timestamp of last modification
+# ====================================================================================
+
+# ====================================================================================
+#                                  Table: st_timetable
+# ====================================================================================
+# Column Name          Data Type                Description
+# ------------------------------------------------------------------------------------
+# id                   BIGINT PRIMARY KEY       Unique identifier for the timetable entry
+# semester             VARCHAR(45)              Semester for which the timetable is set
+# description          VARCHAR(255)             Description of the timetable
+# exam_date            DATETIME                 Date of the exam
+# exam_time            VARCHAR(45)              Time of the exam
+# course_id            BIGINT                   Foreign key referencing st_course (course)
+# course_name          VARCHAR(255)             Name of the course (denormalized)
+# subject_id           BIGINT                   Foreign key referencing st_subject (subject)
+# subject_name         VARCHAR(255)             Name of the subject (denormalized)
+# created_by           VARCHAR(45)              User who created the record
+# modified_by          VARCHAR(45)              User who last modified the record
+# created_datetime     DATETIME                 Timestamp of record creation
+# modified_datetime    DATETIME                 Timestamp of last modification
+# ====================================================================================
+
+# ====================================================================================
+#                                  Table: st_faculty
+# ====================================================================================
+# Column Name          Data Type                Description
+# ------------------------------------------------------------------------------------
+# id                   BIGINT PRIMARY KEY       Unique identifier for the faculty member
+# first_name           VARCHAR(45)              First name of the faculty member
+# last_name            VARCHAR(45)              Last name of the faculty member
+# dob                  DATETIME                 Date of birth of the faculty member
+# gender               VARCHAR(45)              Gender of the faculty member
+# mobile_no            VARCHAR(45)              Mobile number of the faculty member
+# email                VARCHAR(255)             Email address of the faculty member
+# college_id           BIGINT                   Foreign key referencing st_college (college)
+# college_name         VARCHAR(255)             Name of the college (denormalized)
+# course_id            BIGINT                   Foreign key referencing st_course (course)
+# course_name          VARCHAR(255)             Name of the course (denormalized)
+# subject_id           BIGINT                   Foreign key referencing st_subject (subject)
+# subject_name         VARCHAR(255)             Name of the subject (denormalized)
 # created_by           VARCHAR(45)              User who created the record
 # modified_by          VARCHAR(45)              User who last modified the record
 # created_datetime     DATETIME                 Timestamp of record creation
