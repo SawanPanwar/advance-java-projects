@@ -9,7 +9,7 @@
 <body>
 	<div align="center">
 		<h1>User Registration</h1>
-		<form action="UserDetails.jsp" method="post">
+		<form action="UserRegistrationCtl" method="post">
 			<table>
 				<tr>
 					<th>First Name:</th>
