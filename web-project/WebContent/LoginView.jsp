@@ -9,17 +9,9 @@
 <body>
 	<%@ include file="Header.jsp"%>
 	<div align="center">
-		<h1>User Registration</h1>
-		<form action="UserRegistrationCtl" method="post">
+		<h1>Login</h1>
+		<form action="LoginCtl" method="post">
 			<table>
-				<tr>
-					<th>First Name:</th>
-					<td><input type="text" name="firstName"></td>
-				</tr>
-				<tr>
-					<th>Last Name:</th>
-					<td><input type="text" name="lastName"></td>
-				</tr>
 				<tr>
 					<th>Login ID:</th>
 					<td><input type="text" name="loginId"></td>
@@ -29,16 +21,10 @@
 					<td><input type="text" name="password"></td>
 				</tr>
 				<tr>
-					<th>DOB:</th>
-					<td><input type="date" name="dob" style="width: 98%"></td>
-				</tr>
-				<tr>
-					<th>Address:</th>
-					<td><input type="text" name="address"></td>
-				</tr>
-				<tr>
 					<th></th>
-					<td><input type="submit" value="signUp"></td>
+					<td><input type="submit" name="operation" value="signIn">
+						<input type="submit" name="operation" value="signUp">
+				   </td>
 				</tr>
 			</table>
 		</form>
