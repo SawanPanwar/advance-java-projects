@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,6 @@ public class UserRegistrationCtl extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("in UserRegistrationCtl do get");
 		resp.sendRedirect("UserRegistrationView.jsp");
 	}
 
@@ -26,7 +26,7 @@ public class UserRegistrationCtl extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
 		String loginId = req.getParameter("loginId");
@@ -34,13 +34,6 @@ public class UserRegistrationCtl extends HttpServlet {
 		String dob = req.getParameter("dob");
 		String address = req.getParameter("address");
 
-		System.out.println("first name: " + firstName);
-		System.out.println("last name: " + lastName);
-		System.out.println("login Id: " + loginId);
-		System.out.println("password: " + password);
-		System.out.println("dob: " + dob);
-		System.out.println("address: " + address);
-		
 		UserBean bean = new UserBean();
 		bean.setFirstName(firstName);
 		bean.setLastName(lastName);
@@ -52,15 +45,18 @@ public class UserRegistrationCtl extends HttpServlet {
 			e.printStackTrace();
 		}
 		bean.setAddress(address);
-		
+
 		UserModel model = new UserModel();
-		
+
 		try {
 			model.add(bean);
+			req.setAttribute("success", "User added successfully..!!");
 		} catch (Exception e) {
 			e.printStackTrace();
+			req.setAttribute("error", "Login Id already exist..!!");
 		}
 
-		resp.sendRedirect("UserRegistrationView.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("UserRegistrationView.jsp");
+		rd.forward(req, resp);
 	}
 }

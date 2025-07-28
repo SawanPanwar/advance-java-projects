@@ -8,8 +8,21 @@
 </head>
 <body>
 	<%@ include file="Header.jsp"%>
+	<%
+		String error = (String) request.getAttribute("error");
+	%>
 	<div align="center">
 		<h1>Login</h1>
+		<%
+			if (error != null) {
+		%>
+		<h3>
+			<font color="red"><%=error%></font>
+		</h3>
+
+		<%
+			}
+		%>
 		<form action="LoginCtl" method="post">
 			<table>
 				<tr>
@@ -23,8 +36,7 @@
 				<tr>
 					<th></th>
 					<td><input type="submit" name="operation" value="signIn">
-						<input type="submit" name="operation" value="signUp">
-				   </td>
+						<input type="submit" name="operation" value="signUp"></td>
 				</tr>
 			</table>
 		</form>
