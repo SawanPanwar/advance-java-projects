@@ -18,18 +18,5 @@
 			Welcome to <font color="red">Web</font> Project
 		</h1>
 	</div>
-
-	<%
-		UserBean user = (UserBean) request.getAttribute("user");
-	%>
-	<%
-		if (user != null) {
-	%>
-	<h3>
-		Hi,
-		<%=user.getFirstName()%></h3>
-	<%
-		}
-	%>
 </body>
 </html>

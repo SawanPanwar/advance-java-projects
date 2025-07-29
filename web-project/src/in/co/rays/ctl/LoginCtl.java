@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import in.co.rays.bean.UserBean;
 import in.co.rays.model.UserModel;
@@ -17,7 +18,17 @@ public class LoginCtl extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect("LoginView.jsp");
+
+		String op = req.getParameter("operation");
+
+		if (op != null && op.equalsIgnoreCase("Logout")) {
+			HttpSession session = req.getSession();
+			session.invalidate();
+			req.setAttribute("success", "Logout Successfully..!!");
+		}
+
+		RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
+		rd.forward(req, resp);
 	}
 
 	@Override
@@ -34,10 +45,13 @@ public class LoginCtl extends HttpServlet {
 				UserBean bean = model.authenticate(loginId, password);
 
 				if (bean != null) {
-					// resp.sendRedirect("WelcomeCtl");
-					req.setAttribute("user", bean);
-					RequestDispatcher rd = req.getRequestDispatcher("Welcome.jsp");
-					rd.forward(req, resp);
+
+					HttpSession session = req.getSession();
+
+					session.setAttribute("user", bean);
+
+					resp.sendRedirect("WelcomeCtl");
+
 				} else {
 					req.setAttribute("error", "Login & Password Invalid");
 					RequestDispatcher rd = req.getRequestDispatcher("LoginView.jsp");
@@ -51,7 +65,5 @@ public class LoginCtl extends HttpServlet {
 			resp.sendRedirect("UserRegistrationCtl");
 			return;
 		}
-
-		resp.sendRedirect("LoginView.jsp");
 	}
 }
