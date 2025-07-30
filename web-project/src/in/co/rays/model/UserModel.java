@@ -256,6 +256,9 @@ public class UserModel {
 				if (bean.getFirstName() != null && bean.getFirstName().length() > 0) {
 					sql.append(" and first_name like '" + bean.getFirstName() + "%'");
 				}
+				if (bean.getDob() != null && bean.getDob().getTime() > 0) {
+					sql.append(" and dob like '" + new java.sql.Date(bean.getDob().getTime()) + "%'");
+				}
 			}
 
 			if (pageSize > 0) {
