@@ -1,7 +1,6 @@
 package in.co.rays.ctl;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -54,28 +53,37 @@ public class UserListCtl extends HttpServlet {
 
 		pageNo = Integer.parseInt(req.getParameter("pageNo"));
 
+		String[] ids = req.getParameterValues("ids");
+
 		UserModel model = new UserModel();
 
-		if (op.equalsIgnoreCase("next")) {
-			pageNo++;
-		}
-
-		if (op.equalsIgnoreCase("previous")) {
-			pageNo--;
-		}
-
-		if (op.equalsIgnoreCase("search")) {
-			pageNo = 1;
-			bean = new UserBean();
-			bean.setFirstName(req.getParameter("firstName"));
-			try {
-				bean.setDob(sdf.parse(req.getParameter("dob")));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}
-
 		try {
+			if (op.equalsIgnoreCase("next")) {
+				pageNo++;
+			}
+			if (op.equalsIgnoreCase("previous")) {
+				pageNo--;
+			}
+			if (op.equalsIgnoreCase("search")) {
+				pageNo = 1;
+				bean = new UserBean();
+				bean.setFirstName(req.getParameter("firstName"));
+				bean.setDob(sdf.parse(req.getParameter("dob")));
+			}
+			if (op.equalsIgnoreCase("delete")) {
+
+				if (ids != null && ids.length > 0) {
+					pageNo = 1;
+					for (String id : ids) {
+						model.delete(Integer.parseInt(id));
+					}
+				}
+			}
+			if (op.equalsIgnoreCase("add")) {
+				resp.sendRedirect("UserCtl");
+				return;
+			}
+
 			List list = model.search(bean, pageNo, pageSize);
 
 			req.setAttribute("list", list);
