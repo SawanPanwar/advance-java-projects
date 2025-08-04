@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -10,6 +11,7 @@
 	<%@ include file="Header.jsp"%>
 
 	<%
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String success = (String) request.getAttribute("success");
 		String error = (String) request.getAttribute("error");
 	%>
@@ -51,6 +53,10 @@
 		<form action="UserCtl" method="post">
 			<table>
 				<tr>
+					<input type="hidden" name="id"
+						value="<%=(bean != null) ? bean.getId() : ""%>">
+				</tr>
+				<tr>
 					<th>First Name:</th>
 					<td><input type="text" name="firstName"
 						value="<%=(bean != null) ? bean.getFirstName() : ""%>"></td>
@@ -73,7 +79,7 @@
 				<tr>
 					<th>DOB:</th>
 					<td><input type="date" name="dob" style="width: 98%"
-						value="<%=(bean != null) ? bean.getDob() : ""%>"></td>
+						value="<%=(bean != null) ? sdf.format(bean.getDob()) : ""%>"></td>
 				</tr>
 				<tr>
 					<th>Address:</th>

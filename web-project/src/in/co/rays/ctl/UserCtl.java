@@ -62,12 +62,30 @@ public class UserCtl extends HttpServlet {
 
 		UserModel model = new UserModel();
 
-		try {
-			model.add(bean);
-			req.setAttribute("success", "User added successfully..!!");
-		} catch (Exception e) {
-			e.printStackTrace();
-			req.setAttribute("error", "Login Id already exist..!!");
+		String op = req.getParameter("operation");
+
+		if (op.equalsIgnoreCase("save")) {
+			try {
+				model.add(bean);
+				req.setAttribute("bean", bean);
+				req.setAttribute("success", "User added successfully..!!");
+			} catch (Exception e) {
+				e.printStackTrace();
+				req.setAttribute("bean", bean);
+				req.setAttribute("error", "Login Id already exist..!!");
+			}
+		} else if (op.equalsIgnoreCase("update")) {
+			bean.setId(Integer.parseInt(req.getParameter("id")));
+			try {
+				model.update(bean);
+				bean = model.findByPk(bean.getId());
+				req.setAttribute("bean", bean);
+				req.setAttribute("success", "User updated successfully..!!");
+			} catch (Exception e) {
+				e.printStackTrace();
+				req.setAttribute("bean", bean);
+				req.setAttribute("error", "Login Id already exist..!!");
+			}
 		}
 
 		RequestDispatcher rd = req.getRequestDispatcher("UserView.jsp");
