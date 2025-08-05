@@ -11,6 +11,7 @@
 	<%
 		String success = (String) request.getAttribute("success");
 		String error = (String) request.getAttribute("error");
+		String uri = (String) request.getAttribute("uri");
 	%>
 	<div align="center">
 		<h1>Login</h1>
@@ -50,6 +51,7 @@
 						<input type="submit" name="operation" value="signUp"></td>
 				</tr>
 			</table>
+			<input type="hidden" name="uri" value="<%=uri%>">
 		</form>
 	</div>
 </body>
