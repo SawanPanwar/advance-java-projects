@@ -50,6 +50,8 @@ public class LoginCtl extends HttpServlet {
 
 					HttpSession session = req.getSession();
 
+					// session.setMaxInactiveInterval(20);
+
 					session.setAttribute("user", bean);
 
 					if (uri.equalsIgnoreCase("null")) {
